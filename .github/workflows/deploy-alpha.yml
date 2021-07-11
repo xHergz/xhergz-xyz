@@ -33,13 +33,13 @@ jobs:
         run: npm run test
 
       # Set up a place to store the private key
-      - name: Create temp private key file
+      - name: Creating a temp private key file
         run: |
           echo "TEMP_PRIVATE_KEY_FILE=../private_key.pem" >> $GITHUB_ENV
           printf "%s" "${{ secrets.DEPLOY_BOT_PRIVATE_KEY }}" >${{ env.TEMP_PRIVATE_KEY_FILE}}
 
       # Create file to batch commands and set to sftp
-      - name: Create a file to batch sftp commands
+      - name: Creating a file to batch sftp commands
         run: |
           echo "SFTP_COMMAND_FILE=../sftp_commands" >> $GITHUB_ENV
           printf "%s" "put -r $GITHUB_WORKSPACE/dist /var/www/alpha.xhergz.xyz" >${{ env.SFTP_COMMAND_FILE}}
@@ -48,5 +48,5 @@ jobs:
       # Not needed in alpha, has no version number
 
       # Copy release to alpha web folder
-      sftp -b ${{ env.SFTP_COMMAND_FILE}} -P 22 -i ${{ env.TEMP_PRIVATE_KEY_FILE}} ${{ secrets.DEPLOY_BOT_USERNAME }}@${{ secrets.HERGBOT_WEB_SERVER }}
-
+      - name: Deploying the code to the web server folder
+        run: sftp -b ${{ env.SFTP_COMMAND_FILE}} -P 22 -i ${{ env.TEMP_PRIVATE_KEY_FILE}} ${{ secrets.DEPLOY_BOT_USERNAME }}@${{ secrets.HERGBOT_WEB_SERVER }}
