@@ -50,4 +50,4 @@ jobs:
 
       # Run the commands on the server with SFTP
       - name: Deploying the code to the web server folder
-        run: sftp -b ${{ env.SFTP_COMMAND_FILE}} -P 22 -i ${{ env.TEMP_PRIVATE_KEY_FILE}} ${{ secrets.DEPLOY_BOT_USERNAME }}@${{ secrets.HERGBOT_WEB_SERVER }}
+        run: sftp -b ${{ env.SFTP_COMMAND_FILE}} -P 22 -o StrictHostKeyChecking=no -i ${{ env.TEMP_PRIVATE_KEY_FILE}} ${{ secrets.DEPLOY_BOT_USERNAME }}@${{ secrets.HERGBOT_WEB_SERVER }}
