@@ -34,11 +34,19 @@ jobs:
 
       # Set up a place to store the private key
       - name: Creating a temp private key file
-        run: echo "TEMP_PRIVATE_KEY_FILE=../private_key.pem" >> $GITHUB_ENV #&& printf "%s" "${{ secrets.DEPLOY_BOT_PRIVATE_KEY }}" >${{ env.TEMP_PRIVATE_KEY_FILE}}
+        run: echo "TEMP_PRIVATE_KEY_FILE=../private_key.pem" >> $GITHUB_ENV
+        
+      # Writing the private key to the temp file
+      - name: Writing the private key to the temp file
+        run: printf "%s" "${{ secrets.DEPLOY_BOT_PRIVATE_KEY }}" >${{ env.TEMP_PRIVATE_KEY_FILE}}
 
       # Create file to batch commands and set to sftp
       - name: Creating a file to batch sftp commands
-        run: echo "SFTP_COMMAND_FILE=../sftp_commands" >> $GITHUB_ENV && printf "%s" "put -r $GITHUB_WORKSPACE/dist /var/www/alpha.xhergz.xyz" >${{ env.SFTP_COMMAND_FILE}}
+        run: echo "SFTP_COMMAND_FILE=../sftp_commands" >> $GITHUB_ENV
+        
+      #Writing the batch commands file
+      - name: Writing the batch commands file
+        run: printf "%s" "put -r $GITHUB_WORKSPACE/dist /var/www/alpha.xhergz.xyz" >${{ env.SFTP_COMMAND_FILE}}
 
       # Run the commands on the server with SFTP
       - name: Deploying the code to the web server folder
