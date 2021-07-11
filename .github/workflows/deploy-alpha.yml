@@ -40,6 +40,10 @@ jobs:
       - name: Writing the private key to the temp file
         run: printf "%s" "${{ secrets.DEPLOY_BOT_PRIVATE_KEY }}" >${{ env.TEMP_PRIVATE_KEY_FILE}}
 
+      # Avoid the permissions too open error on the private key
+      - name: Changing the permissions for the private key
+        run: chmod 600 ${{ env.TEMP_PRIVATE_KEY_FILE}}
+
       # Create file to batch commands and set to sftp
       - name: Creating a file to batch sftp commands
         run: echo "SFTP_COMMAND_FILE=../sftp_commands" >> $GITHUB_ENV
