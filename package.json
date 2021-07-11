@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --mode=production",
     "dev": "webpack serve",
-    "test": "echo \"No tests to run yet\" && exit 1"
+    "test": "echo \"No tests to run yet\" && exit 0"
   },
   "repository": {
     "type": "git",
