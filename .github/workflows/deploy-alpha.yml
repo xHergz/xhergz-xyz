@@ -34,7 +34,7 @@ jobs:
 
       # Set up a place to store the private key
       - name: Creating a temp private key file
-        run: echo "TEMP_PRIVATE_KEY_FILE=../private_key.pem" >> $GITHUB_ENV && printf "%s" "${{ secrets.DEPLOY_BOT_PRIVATE_KEY }}" >${{ env.TEMP_PRIVATE_KEY_FILE}}
+        run: echo "TEMP_PRIVATE_KEY_FILE=../private_key.pem" >> $GITHUB_ENV #&& printf "%s" "${{ secrets.DEPLOY_BOT_PRIVATE_KEY }}" >${{ env.TEMP_PRIVATE_KEY_FILE}}
 
       # Create file to batch commands and set to sftp
       - name: Creating a file to batch sftp commands
