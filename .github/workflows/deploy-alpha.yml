@@ -50,7 +50,7 @@ jobs:
         
       #Writing the batch commands file
       - name: Writing the batch commands file
-        run: printf "%s" "put -r $GITHUB_WORKSPACE/dist /var/www/alpha.xhergz.xyz" >${{ env.SFTP_COMMAND_FILE}}
+        run: printf "%s" "put -r $GITHUB_WORKSPACE/dist /var/www/alpha.xhergz.xyz/public" >${{ env.SFTP_COMMAND_FILE}}
 
       # Run the commands on the server with SFTP
       - name: Deploying the code to the web server folder
