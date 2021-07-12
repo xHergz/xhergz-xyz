@@ -49,7 +49,7 @@ function App() {
                     </Switch>
                 </main>
                 <footer className='page-footer'>
-                    Version 0.1.2
+                    Version 0.1.3
                 </footer>
             </div>
         </Router>
