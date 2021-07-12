@@ -41,17 +41,21 @@ jobs:
         run: printf "%s" "${{ secrets.DEPLOY_BOT_PRIVATE_KEY }}" >${{ env.TEMP_PRIVATE_KEY_FILE}}
 
       # Avoid the permissions too open error on the private key
-      - name: Changing the permissions for the private key
-        run: chmod 600 ${{ env.TEMP_PRIVATE_KEY_FILE}}
+      #- name: Changing the permissions for the private key
+      #  run: chmod 600 ${{ env.TEMP_PRIVATE_KEY_FILE}}
 
       # Create file to batch commands and set to sftp
-      - name: Creating a file to batch sftp commands
-        run: echo "SFTP_COMMAND_FILE=../sftp_commands" >> $GITHUB_ENV
+      #- name: Creating a file to batch sftp commands
+      # run: echo "SFTP_COMMAND_FILE=../sftp_commands" >> $GITHUB_ENV
         
       # Writing the batch commands file
-      - name: Writing the batch commands file
-        run: printf "%s" "put -r $GITHUB_WORKSPACE/dist/ /var/www/alpha.xhergz.xyz/public/" >${{ env.SFTP_COMMAND_FILE}}
+      #- name: Writing the batch commands file
+      #  run: printf "%s" "put -r $GITHUB_WORKSPACE/dist/ /var/www/alpha.xhergz.xyz/public/" >${{ env.SFTP_COMMAND_FILE}}
 
       # Run the commands on the server with SFTP
-      - name: Deploying the code to the web server folder
-        run: sftp -b ${{ env.SFTP_COMMAND_FILE}} -P 22 -o StrictHostKeyChecking=no -i ${{ env.TEMP_PRIVATE_KEY_FILE}} ${{ secrets.DEPLOY_BOT_USERNAME }}@${{ secrets.HERGBOT_WEB_SERVER }}
+      #- name: Deploying the code to the web server folder
+      #  run: sftp -b ${{ env.SFTP_COMMAND_FILE}} -P 22 -o StrictHostKeyChecking=no -i ${{ env.TEMP_PRIVATE_KEY_FILE}} ${{ secrets.DEPLOY_BOT_USERNAME }}@${{ secrets.HERGBOT_WEB_SERVER }}
+
+      # Using rsync to copy files to the server
+      - name: Copying files to the server
+        run: rsync --delete -zrp -e "ssh -i ${{ env.TEMP_PRIVATE_KEY_FILE}}" $GITHUB_WORKSPACE/dist/ ${{ secrets.DEPLOY_BOT_USERNAME }}@${{ secrets.HERGBOT_WEB_SERVER }}:/var/www/alpha.xhergz.xyz/public/
