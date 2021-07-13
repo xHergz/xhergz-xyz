@@ -1,26 +1,18 @@
-# This is a basic workflow to help you get started with Actions
+# Deploys the develop branch to the alpha server. No back ups are generated.
 
 name: deploy-alpha
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches: [ development ]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
+  deploy:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Set up the project name
-      - name: Setting up the project name
-        run: echo "PROJECT_NAME=xhergz-xyz" >> $GITHUB_ENV
-
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
@@ -43,18 +35,6 @@ jobs:
       # Avoid the permissions too open error on the private key
       - name: Changing the permissions for the private key
         run: chmod 600 ${{ env.TEMP_PRIVATE_KEY_FILE}}
-
-      # Create file to batch commands and set to sftp
-      #- name: Creating a file to batch sftp commands
-      # run: echo "SFTP_COMMAND_FILE=../sftp_commands" >> $GITHUB_ENV
-        
-      # Writing the batch commands file
-      #- name: Writing the batch commands file
-      #  run: printf "%s" "put -r $GITHUB_WORKSPACE/dist/ /var/www/alpha.xhergz.xyz/public/" >${{ env.SFTP_COMMAND_FILE}}
-
-      # Run the commands on the server with SFTP
-      #- name: Deploying the code to the web server folder
-      #  run: sftp -b ${{ env.SFTP_COMMAND_FILE}} -P 22 -o StrictHostKeyChecking=no -i ${{ env.TEMP_PRIVATE_KEY_FILE}} ${{ secrets.DEPLOY_BOT_USERNAME }}@${{ secrets.HERGBOT_WEB_SERVER }}
 
       # Using rsync to copy files to the server
       - name: Copying files to the server
