@@ -60,6 +60,12 @@ module.exports = {
                 {
                     from: './src/assets/favicon.ico',
                 },
+                {
+                    from: './src/assets/logo.png'
+                },
+                {
+                    from: './src/manifest.json'
+                }
             ],
         }),
     ],
