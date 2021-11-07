@@ -9,12 +9,14 @@ import {
 import logo from './assets/logo.png';
 import Home from './pages/Home';
 import Rose from './pages/rose/Rose';
+import Misc from './pages/misc/Misc';
 
 import './styles/App.scss';
 
 const PATHS = {
     HOME: '/',
     ROSE: '/rose',
+    MISC: '/misc'
 };
 
 function App() {
@@ -31,6 +33,9 @@ function App() {
                             <li>
                                 <Link to={PATHS.ROSE}>Rose</Link>
                             </li>
+                            <li>
+                                <Link to={PATHS.MISC}>Misc</Link>
+                            </li>
                         </ul>
                         <img className='logoImage rotateCounterClockwise' src={logo} />
                     </nav>
@@ -39,6 +44,9 @@ function App() {
                     <Switch>
                         <Route path={PATHS.ROSE}>
                             <Rose />
+                        </Route>
+                        <Route path={PATHS.MISC}>
+                            <Misc />
                         </Route>
                         <Route path={PATHS.HOME}>
                             <Home />
