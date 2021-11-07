@@ -9,11 +9,9 @@ const ItemQuality: React.FunctionComponent<ItemQualityProps> = (
 ): JSX.Element => {
     const [hitRate, setHitRate] = useState<number>();
     const [durability, setDurability] = useState<number>();
-    const [quality, setQuality] = useState<number>();
 
-    const calculate = (): void => {
-        const quality = Math.floor((hitRate + 15 - durability * 0.8) / 0.6);
-        setQuality(quality);
+    const calculateMethodSix = (): number => {
+        return Math.floor((hitRate + 15 - durability * 0.8) / 0.6);
     };
 
     const canCalculate = !isNil(hitRate) && !isNil(durability);
@@ -30,10 +28,9 @@ const ItemQuality: React.FunctionComponent<ItemQualityProps> = (
                 value={durability}
                 onChange={setDurability}
             />
-            <button onClick={calculate} disabled={!canCalculate}>
-                Calculate
-            </button>
-            {!isNil(quality) ? <div>Quality = {quality}</div> : null}
+            {!isNil(hitRate) && !isNil(durability) ? (
+                <div>Quality = {calculateMethodSix()}</div>
+            ) : null}
         </div>
     );
 };
