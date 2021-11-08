@@ -1,0 +1,37 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.baseButton {
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	outline: inherit;
+}
+
+.actionButton {
+    @extend .baseButton;
+    height: 32px;
+    min-width: 128px;
+    cursor: pointer;
+}
+
+.positiveActionButton {
+    @extend .actionButton;
+    background-color:  green;
+    border: 1px solid green;
+    &:hover {
+        background-color: lightgreen;
+    }
+    color: white;
+}
+
+.negativeActionButton {
+    @extend .actionButton;
+    background-color: red;
+    border: 1px solid darkred;
+    color: white;
+}

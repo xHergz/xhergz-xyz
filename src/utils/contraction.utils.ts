@@ -32,3 +32,7 @@ export const loadContractions = (): Contraction[] => {
         };
     });
 };
+
+export const deleteAllContractions = (): void => {
+    window.localStorage.removeItem(CONTRACTIONS_KEY);
+}

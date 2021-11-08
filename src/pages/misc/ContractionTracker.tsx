@@ -3,10 +3,13 @@ import { format, intervalToDuration } from "date-fns";
 
 import {
     Contraction,
+    deleteAllContractions,
     loadContractions,
     saveContractions,
 } from "../../utils/contraction.utils";
 import { isNil } from "lodash";
+
+import "../../styles/ContractionTracker.scss";
 
 const MAX_PAIN_LEVEL = 10;
 
@@ -48,6 +51,13 @@ function ContractionTracker(): JSX.Element {
         setCountInterval(null);
     };
 
+    const clearAllContractions = (): void => {
+        if (window.confirm("Are you sure you want to delete all contractions?")) {
+            deleteAllContractions();
+            setContractions(loadContractions());
+        }
+    };
+
     const formatDuration = (): string => {
         const contractionDuration = intervalToDuration({
             start: 0,
@@ -84,10 +94,10 @@ function ContractionTracker(): JSX.Element {
     };
 
     return (
-        <div>
+        <div className='container'>
             <div>
                 {isNil(start) ? (
-                    <button onClick={startContraction}>New</button>
+                    <button className='positiveActionButton' onClick={startContraction}>New</button>
                 ) : (
                     activeContractionControls()
                 )}
@@ -121,6 +131,9 @@ function ContractionTracker(): JSX.Element {
                     })}
                 </tbody>
             </table>
+            <div>
+                <button onClick={clearAllContractions}>Clear All</button>
+            </div>
         </div>
     );
 }
