@@ -1,5 +1,10 @@
-import React, { useState } from "react";
-import { format, intervalToDuration } from "date-fns";
+import React, { useMemo, useState } from "react";
+import {
+    differenceInHours,
+    format,
+    intervalToDuration,
+    subHours,
+} from "date-fns";
 
 import {
     Contraction,
@@ -7,11 +12,14 @@ import {
     loadContractions,
     saveContractions,
 } from "../../utils/contraction.utils";
-import { isNil } from "lodash";
+import { isNil, reverse } from "lodash";
 
 import "../../styles/ContractionTracker.scss";
+import PageWrapper from "../../components/PageWrapper/PageWrapper";
+import { minSecDuration } from "../../utils/date.utils";
+import classNames from "classnames";
 
-const MAX_PAIN_LEVEL = 10;
+const MAX_PAIN_LEVEL = 5;
 
 function ContractionTracker(): JSX.Element {
     const [contractions, setContractions] = useState<Contraction[]>(
@@ -22,6 +30,11 @@ function ContractionTracker(): JSX.Element {
     const [countInterval, setCountInterval] = useState<NodeJS.Timeout | null>(
         null
     );
+    const hospitalStatusClasses = classNames({
+        hospitalStatus: true,
+        notHospitalTime: true,
+        hospitalTime: false,
+    });
 
     const startContraction = (): void => {
         setStart(new Date());
@@ -52,24 +65,28 @@ function ContractionTracker(): JSX.Element {
     };
 
     const clearAllContractions = (): void => {
-        if (window.confirm("Are you sure you want to delete all contractions?")) {
+        if (
+            window.confirm("Are you sure you want to delete all contractions?")
+        ) {
             deleteAllContractions();
             setContractions(loadContractions());
         }
     };
 
-    const formatDuration = (): string => {
-        const contractionDuration = intervalToDuration({
+    const formatCurrentDuration = (): string => {
+        const currentDuration = intervalToDuration({
             start: 0,
             end: duration * 1000,
         });
-        const minutes = isNil(contractionDuration.minutes)
-            ? "00"
-            : contractionDuration.minutes.toString().padStart(2, "0");
-        const seconds = isNil(contractionDuration.seconds)
-            ? "00"
-            : contractionDuration.seconds.toString().padStart(2, "0");
-        return `${minutes}:${seconds}`;
+        return minSecDuration(currentDuration);
+    };
+
+    const formatContractionDuration = (contraction: Contraction): string => {
+        const contractionDuration = intervalToDuration({
+            start: contraction.start,
+            end: contraction.end,
+        });
+        return minSecDuration(contractionDuration);
     };
 
     const painButtons = (): JSX.Element => {
@@ -82,59 +99,112 @@ function ContractionTracker(): JSX.Element {
 
     const activeContractionControls = (): JSX.Element => {
         return (
-            <div>
-                <div>
-                    <span>Start: {format(start, "hh:mm:ss")}</span>
-                    <span>{formatDuration()}</span>
+            <>
+                <div className="currentInfo">
+                    <span>
+                        <strong>Start:</strong> {format(start, "hh:mm:ss")}
+                    </span>
+                    <span>
+                        <strong>Duration:</strong>
+                        {formatCurrentDuration()}
+                    </span>
                 </div>
-                <div>{painButtons()}</div>
-                <button onClick={resetContraction}>Cancel</button>
-            </div>
+                <div className="painControls">{painButtons()}</div>
+                <button
+                    className="negativeActionButton"
+                    onClick={resetContraction}
+                >
+                    Cancel
+                </button>
+            </>
         );
     };
 
+    const lastHourContractions = useMemo(() => {
+        const oneHourAgo = subHours(new Date(), 1);
+        return contractions.filter((contraction) => {
+            return differenceInHours(contraction.start, oneHourAgo) === 0;
+        });
+    }, [contractions]);
+
+    console.log(lastHourContractions);
+
     return (
-        <div className='container'>
-            <div>
-                {isNil(start) ? (
-                    <button className='positiveActionButton' onClick={startContraction}>New</button>
-                ) : (
-                    activeContractionControls()
-                )}
+        <PageWrapper hideLogos>
+            <div className="container">
+                <div className={hospitalStatusClasses}>
+                    Hospital Time: <strong>NO</strong>
+                </div>
+                <div className="summary">
+                    <span>
+                        <strong>Last Hour:</strong>
+                    </span>
+                    <span>Contractions:</span>
+                    <span>Avg Duration:</span>
+                    <span>Avg Frequency:</span>
+                    <span>Avg Pain:</span>
+                </div>
+                <div className="contractionControls">
+                    {isNil(start) ? (
+                        <button
+                            className="positiveActionButton"
+                            onClick={startContraction}
+                        >
+                            Start
+                        </button>
+                    ) : (
+                        activeContractionControls()
+                    )}
+                </div>
+                <table>
+                    <colgroup>
+                        <col style={{ width: "25%" }} />
+                        <col style={{ width: "25%" }} />
+                        <col style={{ width: "25%" }} />
+                        <col style={{ width: "25%" }} />
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>Start</th>
+                            <th>End</th>
+                            <th>Pain</th>
+                            <th>Duration</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {reverse(contractions.slice(-10)).map((contraction) => {
+                            return (
+                                <tr>
+                                    <td className="dataCell">
+                                        {format(contraction.start, "hh:mm")}
+                                    </td>
+                                    <td className="dataCell">
+                                        {format(contraction.end, "hh:mm")}
+                                    </td>
+                                    <td className="dataCell">
+                                        {contraction.pain}
+                                    </td>
+                                    <td className="dataCell">
+                                        {formatContractionDuration(contraction)}
+                                    </td>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </table>
+                <div className="tableActions">
+                    <button className="actionButton" onClick={() => {}}>
+                        Load More
+                    </button>
+                    <button
+                        className="negativeActionButton"
+                        onClick={clearAllContractions}
+                    >
+                        Clear All
+                    </button>
+                </div>
             </div>
-            <table>
-                <colgroup>
-                    <col style={{ width: "25%" }} />
-                    <col style={{ width: "25%" }} />
-                    <col style={{ width: "25%" }} />
-                    <col style={{ width: "25%" }} />
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th>Start</th>
-                        <th>End</th>
-                        <th>Pain</th>
-                        <th>Duration</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {contractions.slice(-10).map((contraction) => {
-                        console.log("formatting", contraction);
-                        return (
-                            <tr>
-                                <td>{format(contraction.start, "hh:mm")}</td>
-                                <td>{format(contraction.end, "hh:mm")}</td>
-                                <td>{contraction.pain}</td>
-                                <td></td>
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
-            <div>
-                <button onClick={clearAllContractions}>Clear All</button>
-            </div>
-        </div>
+        </PageWrapper>
     );
 }
 
@@ -149,7 +219,11 @@ const PainButton: React.FunctionComponent<PainButtonProps> = (
     const clickButton = (): void => {
         props.onClick(props.level);
     };
-    return <button onClick={clickButton}>{props.level}</button>;
+    return (
+        <button className="painButton" onClick={clickButton}>
+            {props.level}
+        </button>
+    );
 };
 
 export default ContractionTracker;

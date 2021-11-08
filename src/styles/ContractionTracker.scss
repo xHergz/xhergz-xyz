@@ -1,37 +1,125 @@
+@import "./Common.scss";
+
 .container {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    max-width: 100vw;
+}
+
+.hospitalStatus {
+    padding: 8px;
+}
+
+.notHospitalTime {
+    background-color: lightcoral;
+}
+
+.hospitalTime {
+    background-color: lightgreen;
+}
+
+.summary {
+    display: flex;
+    flex-direction: column;
+    background-color: lightgray;
+    border-radius: 10px;
+    padding: 16px;
 }
 
 .baseButton {
     background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	outline: inherit;
+    color: inherit;
+    border: none;
+    padding: 0;
+    outline: inherit;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
 }
 
 .actionButton {
     @extend .baseButton;
     height: 32px;
     min-width: 128px;
-    cursor: pointer;
+    background-color: white;
+    border: 1px solid #404040;
+    color: #404040;
+    &:hover {
+        background-color: #e4e4e4;
+    }
 }
 
 .positiveActionButton {
     @extend .actionButton;
-    background-color:  green;
-    border: 1px solid green;
+    background-color: $success-light;
+    border: 1px solid $success;
     &:hover {
-        background-color: lightgreen;
+        background-color: $success;
+        border: 1px solid $success-dark;
     }
     color: white;
 }
 
 .negativeActionButton {
     @extend .actionButton;
-    background-color: red;
-    border: 1px solid darkred;
+    background-color: $error-light;
+    border: 1px solid $error;
+    &:hover {
+        background-color: $error;
+        border: 1px solid $error-dark;
+    }
     color: white;
+}
+
+.painButton {
+    @extend .baseButton;
+    width: 48px;
+    height: 48px;
+    background-color: white;
+    border: 1px solid #404040;
+    color: #404040;
+    &:hover {
+        background-color: #e4e4e4;
+    }
+}
+
+.dataCell {
+    text-align: center;
+}
+
+.contractionControls {
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+.contractionInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.currentInfo {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.painControls {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.tableActions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
