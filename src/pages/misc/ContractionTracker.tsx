@@ -10,6 +10,7 @@ import {
     Contraction,
     deleteAllContractions,
     getContractionSummary,
+    isHospitalTime,
     loadContractions,
     saveContractions,
 } from "../../utils/contraction.utils";
@@ -31,11 +32,6 @@ function ContractionTracker(): JSX.Element {
     const [countInterval, setCountInterval] = useState<NodeJS.Timeout | null>(
         null
     );
-    const hospitalStatusClasses = classNames({
-        hospitalStatus: true,
-        notHospitalTime: true,
-        hospitalTime: false,
-    });
 
     const startContraction = (): void => {
         setStart(new Date());
@@ -122,19 +118,26 @@ function ContractionTracker(): JSX.Element {
     };
 
     const lastHourContractions = useMemo(() => {
-        const oneHourAgo = subHours(new Date(), 1);
+        const now = new Date();
         return contractions.filter((contraction) => {
-            return differenceInHours(contraction.start, oneHourAgo) === 0;
+            return differenceInHours(contraction.start, now) === 0;
         });
     }, [contractions]);
-
     const contractionSummary = getContractionSummary(lastHourContractions);
+    const hospitalTime = isHospitalTime(contractionSummary);
+    const hospitalTimeLabel = hospitalTime ? 'YES' : 'NO';
+
+    const hospitalStatusClasses = classNames({
+        hospitalStatus: true,
+        notHospitalTime: !hospitalTime,
+        hospitalTime: hospitalTime,
+    });
 
     return (
         <PageWrapper hideLogos>
             <div className="container">
                 <div className={hospitalStatusClasses}>
-                    Hospital Time: <strong>NO</strong>
+                    Hospital Time: <strong>{hospitalTimeLabel}</strong>
                 </div>
                 <div className="summary">
                     <span>
