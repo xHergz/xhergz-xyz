@@ -9,3 +9,9 @@ export const minSecDuration = (duration: Duration): string => {
         : duration.seconds.toString().padStart(2, "0");
     return `${minutes}m ${seconds}s`;
 };
+
+export const secondsToMinSec = (totalSeconds: number): string => {
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = Math.floor(totalSeconds % 60);
+    return `${minutes}m ${seconds}s`;
+};

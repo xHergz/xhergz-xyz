@@ -9,6 +9,7 @@ import {
 import {
     Contraction,
     deleteAllContractions,
+    getContractionSummary,
     loadContractions,
     saveContractions,
 } from "../../utils/contraction.utils";
@@ -16,7 +17,7 @@ import { isNil, reverse } from "lodash";
 
 import "../../styles/ContractionTracker.scss";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
-import { minSecDuration } from "../../utils/date.utils";
+import { minSecDuration, secondsToMinSec } from "../../utils/date.utils";
 import classNames from "classnames";
 
 const MAX_PAIN_LEVEL = 5;
@@ -102,7 +103,7 @@ function ContractionTracker(): JSX.Element {
             <>
                 <div className="currentInfo">
                     <span>
-                        <strong>Start:</strong> {format(start, "hh:mm:ss")}
+                        <strong>Start:</strong> {format(start, "hh:mm:ss bb")}
                     </span>
                     <span>
                         <strong>Duration:</strong>
@@ -127,7 +128,7 @@ function ContractionTracker(): JSX.Element {
         });
     }, [contractions]);
 
-    console.log(lastHourContractions);
+    const contractionSummary = getContractionSummary(lastHourContractions);
 
     return (
         <PageWrapper hideLogos>
@@ -139,10 +140,17 @@ function ContractionTracker(): JSX.Element {
                     <span>
                         <strong>Last Hour:</strong>
                     </span>
-                    <span>Contractions:</span>
-                    <span>Avg Duration:</span>
-                    <span>Avg Frequency:</span>
-                    <span>Avg Pain:</span>
+                    <span>Contractions: {contractionSummary.count}</span>
+                    {
+                        lastHourContractions.length > 0 ? (
+                            <>
+                                <span>Avg Duration: {secondsToMinSec(contractionSummary.averageDuration)}</span>
+                                <span>Avg Frequency: {secondsToMinSec(contractionSummary.averageFrequency)}</span>
+                                <span>Avg Pain: {contractionSummary.averagePain}</span>
+                            </>
+                        ) : null
+                    }
+                    
                 </div>
                 <div className="contractionControls">
                     {isNil(start) ? (
@@ -176,10 +184,10 @@ function ContractionTracker(): JSX.Element {
                             return (
                                 <tr>
                                     <td className="dataCell">
-                                        {format(contraction.start, "hh:mm")}
+                                        {format(contraction.start, "hh:mm bb")}
                                     </td>
                                     <td className="dataCell">
-                                        {format(contraction.end, "hh:mm")}
+                                        {format(contraction.end, "hh:mm bb")}
                                     </td>
                                     <td className="dataCell">
                                         {contraction.pain}
