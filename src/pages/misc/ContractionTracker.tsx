@@ -131,8 +131,8 @@ function ContractionTracker(): JSX.Element {
             return differenceInMinutes(contraction.start, now) <= 75 || differenceInMinutes(contraction.end, now) <= 75;
         });
     }, [contractions]);
-    const contractionSummary = getContractionSummary(lastHourContractions);
-    const hospitalTime = isHospitalTime(contractionSummary);
+    const contractionSummary = lastHourContractions.length > 0 ? getContractionSummary(lastHourContractions) : undefined;
+    const hospitalTime = isNil(contractionSummary) ? false : isHospitalTime(contractionSummary);
     const hospitalTimeLabel = hospitalTime ? 'YES' : 'NO';
 
     const hospitalStatusClasses = classNames({
@@ -149,22 +149,25 @@ function ContractionTracker(): JSX.Element {
                 <div className={hospitalStatusClasses}>
                     Hospital Time: <strong>{hospitalTimeLabel}</strong>
                 </div>
-                <div className="summary">
-                    <span>
-                        <strong>Last Hour:</strong>
-                    </span>
-                    <span>Contractions: {contractionSummary.count}</span>
-                    {
-                        lastHourContractions.length > 0 ? (
-                            <>
-                                <span>Avg Duration: {secondsToMinSec(contractionSummary.averageDuration)}</span>
-                                <span>Avg Frequency: {secondsToMinSec(contractionSummary.averageFrequency)}</span>
-                                <span>Avg Pain: {contractionSummary.averagePain}</span>
-                            </>
-                        ) : null
-                    }
-                    
-                </div>
+                {
+                    isNil(contractionSummary) ? null : (
+                        <div className="summary">
+                            <span>
+                                <strong>Last Hour:</strong>
+                            </span>
+                            <span>Contractions: {contractionSummary.count}</span>
+                            {
+                                lastHourContractions.length > 0 ? (
+                                    <>
+                                        <span>Avg Duration: {secondsToMinSec(contractionSummary.averageDuration)}</span>
+                                        <span>Avg Frequency: {secondsToMinSec(contractionSummary.averageFrequency)}</span>
+                                        <span>Avg Pain: {contractionSummary.averagePain}</span>
+                                    </>
+                                ) : null
+                            }
+                        </div>
+                    )
+                }
                 <div className="contractionControls">
                     {isNil(start) ? (
                         <button

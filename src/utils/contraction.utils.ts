@@ -64,7 +64,6 @@ export const getContractionSummary = (contractions: Contraction[]): ContractionS
 
     const earliest = minBy(contractions, c => c.start.valueOf());
     const latest = maxBy(contractions, c => c.end.valueOf());
-    console.log(earliest, latest);
     return {
         count: contractions.length,
         averageDuration: meanBy(contractions, (c) => differenceInSeconds(c.end, c.start)),
@@ -75,7 +74,6 @@ export const getContractionSummary = (contractions: Contraction[]): ContractionS
 };
 
 export const isHospitalTime = (summary: ContractionSummary): boolean => {
-    console.log(summary, HOSPITAL_LIMITS);
     return summary.averageDuration >= HOSPITAL_LIMITS.DURATION
         && summary.averageFrequency <= HOSPITAL_LIMITS.FREQUENCY
         && summary.range >= HOSPITAL_LIMITS.RANGE;
