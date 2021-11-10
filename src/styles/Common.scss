@@ -1,24 +1,32 @@
+// Colours (https://mui.com/customization/palette/#default-values)
+$success: #2e7d32;
+$success-light: #4caf50;
+$success-dark: #1b5e20;
+
+$error: #d32f2f;
+$error-light: #ef5350;
+$error-dark: #c62828;
+
 // Breakpoints
 $breakpoints: (
-	'mobile': '420px',
-	'mobile-landscape': '768px',
-	'tablet': '1024px',
-	'table-landscape': '1366px',
-	'desktop': '1920px'
+    "mobile": "420px",
+    "mobile-landscape": "768px",
+    "tablet": "1024px",
+    "table-landscape": "1366px",
+    "desktop": "1920px",
 );
 
-
 @mixin break($screenMax) {
-	@media all and (min-width: map-get($map: $breakpoints, $key: $screenMax)) {
-		@content;
-	}
+    @media all and (min-width: map-get($map: $breakpoints, $key: $screenMax)) {
+        @content;
+    }
 }
 
 @mixin buttonReset() {
     padding: 0;
-	border: none;
-	font: inherit;
-	color: inherit;
-	background-color: transparent;
-	cursor: pointer;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    cursor: pointer;
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch, Route, Link } from "react-router-dom";
+import PageWrapper from "../../components/PageWrapper/PageWrapper";
 import ItemQuality from "./ItemQuality";
 
 import ItemStats from "./ItemStats";
@@ -14,7 +15,7 @@ const PATHS = {
 
 function Rose(): JSX.Element {
     return (
-        <div>
+        <PageWrapper>
             <Switch>
                 <Route path={PATHS.ITEM_QUALITY}>
                     <ItemQuality />
@@ -45,7 +46,7 @@ function Rose(): JSX.Element {
                     </div>
                 </Route>
             </Switch>
-        </div>
+        </PageWrapper>
     );
 }
 
