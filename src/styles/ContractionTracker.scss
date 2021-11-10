@@ -50,6 +50,10 @@
     &:hover {
         background-color: #e4e4e4;
     }
+    &:disabled {
+        background-color: #CACACA;
+        cursor: not-allowed;
+    }
 }
 
 .positiveActionButton {
@@ -122,4 +126,27 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.table {
+    border-collapse: collapse;
+}
+
+.tableHeader {
+    background-color: #404040;
+    color: white;
+    font-weight: bold;
+    &>tr>th {
+        padding: 8px 0;
+    }
+}
+
+.tableBody>tr {
+    &>td {
+        padding: 4px 0;
+    }
+}
+
+.tableBody>tr:nth-child(odd) {
+    background-color: #e0e0e0;
 }

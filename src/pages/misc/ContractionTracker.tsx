@@ -1,6 +1,8 @@
 import React, { useMemo, useState } from "react";
 import {
     differenceInHours,
+    differenceInMinutes,
+    differenceInSeconds,
     format,
     intervalToDuration,
     subHours,
@@ -22,6 +24,7 @@ import { minSecDuration, secondsToMinSec } from "../../utils/date.utils";
 import classNames from "classnames";
 
 const MAX_PAIN_LEVEL = 5;
+const VIEW_INTEVAL = 10;
 
 function ContractionTracker(): JSX.Element {
     const [contractions, setContractions] = useState<Contraction[]>(
@@ -32,6 +35,7 @@ function ContractionTracker(): JSX.Element {
     const [countInterval, setCountInterval] = useState<NodeJS.Timeout | null>(
         null
     );
+    const [contractionsShown, setContractionsShown] = useState<number>(VIEW_INTEVAL)
 
     const startContraction = (): void => {
         setStart(new Date());
@@ -68,6 +72,10 @@ function ContractionTracker(): JSX.Element {
             deleteAllContractions();
             setContractions(loadContractions());
         }
+    };
+
+    const showMoreContractions = (): void => {
+        setContractionsShown(contractionsShown + VIEW_INTEVAL);
     };
 
     const formatCurrentDuration = (): string => {
@@ -120,7 +128,7 @@ function ContractionTracker(): JSX.Element {
     const lastHourContractions = useMemo(() => {
         const now = new Date();
         return contractions.filter((contraction) => {
-            return differenceInHours(contraction.start, now) === 0;
+            return differenceInMinutes(contraction.start, now) <= 75 || differenceInMinutes(contraction.end, now) <= 75;
         });
     }, [contractions]);
     const contractionSummary = getContractionSummary(lastHourContractions);
@@ -132,6 +140,8 @@ function ContractionTracker(): JSX.Element {
         notHospitalTime: !hospitalTime,
         hospitalTime: hospitalTime,
     });
+
+    const visibleContractions = reverse(contractions.slice(contractionsShown * -1));
 
     return (
         <PageWrapper hideLogos>
@@ -167,23 +177,25 @@ function ContractionTracker(): JSX.Element {
                         activeContractionControls()
                     )}
                 </div>
-                <table>
+                <table className="table">
                     <colgroup>
                         <col style={{ width: "25%" }} />
                         <col style={{ width: "25%" }} />
-                        <col style={{ width: "25%" }} />
-                        <col style={{ width: "25%" }} />
+                        <col style={{ width: "10%" }} />
+                        <col style={{ width: "20%" }} />
+                        <col style={{ width: "20%" }} />
                     </colgroup>
-                    <thead>
+                    <thead className="tableHeader">
                         <tr>
                             <th>Start</th>
                             <th>End</th>
                             <th>Pain</th>
-                            <th>Duration</th>
+                            <th>Dur.</th>
+                            <th>Freq.</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {reverse(contractions.slice(-10)).map((contraction) => {
+                    <tbody className="tableBody">
+                        {visibleContractions.map((contraction, index) => {
                             return (
                                 <tr>
                                     <td className="dataCell">
@@ -198,13 +210,19 @@ function ContractionTracker(): JSX.Element {
                                     <td className="dataCell">
                                         {formatContractionDuration(contraction)}
                                     </td>
+                                    <td className="dataCell">
+                                        {
+                                            index === (contractions.length - 1)
+                                                ? 'N/A'
+                                                : secondsToMinSec(differenceInSeconds(contraction.start, contractions[contractions.length - 2 - index].start))}
+                                    </td>
                                 </tr>
                             );
                         })}
                     </tbody>
                 </table>
                 <div className="tableActions">
-                    <button className="actionButton" onClick={() => {}}>
+                    <button className="actionButton" onClick={showMoreContractions} disabled={contractionsShown >= contractions.length}>
                         Load More
                     </button>
                     <button

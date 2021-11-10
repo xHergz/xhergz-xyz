@@ -1,4 +1,4 @@
-import { differenceInSeconds, parseISO, subMinutes } from "date-fns";
+import { addSeconds, differenceInSeconds, parseISO, subMinutes, subSeconds } from "date-fns";
 import { isNil, maxBy, mean, meanBy, minBy } from "lodash";
 
 const CONTRACTIONS_KEY = "contractions";
@@ -33,7 +33,6 @@ export const saveContractions = (contractions: Contraction[]): void => {
 };
 
 export const loadContractions = (): Contraction[] => {
-    return PERFECT_CONTRACTIONS;
     const contractions = window.localStorage.getItem(CONTRACTIONS_KEY);
     const raw: RawContraction[] = isNil(contractions)
         ? []
@@ -77,7 +76,7 @@ export const getContractionSummary = (contractions: Contraction[]): ContractionS
 
 export const isHospitalTime = (summary: ContractionSummary): boolean => {
     console.log(summary, HOSPITAL_LIMITS);
-    return summary.averageDuration <= HOSPITAL_LIMITS.DURATION
+    return summary.averageDuration >= HOSPITAL_LIMITS.DURATION
         && summary.averageFrequency <= HOSPITAL_LIMITS.FREQUENCY
         && summary.range >= HOSPITAL_LIMITS.RANGE;
 };
@@ -160,4 +159,78 @@ const PERFECT_CONTRACTIONS: Contraction[] = [
         end: subMinutes(now, 4),
         pain: 5
     }
-]
+];
+
+const NOT_ENOUGH_CONTRACTIONS: Contraction[] = PERFECT_CONTRACTIONS.slice(-5);
+
+const NOT_FREQUENT_ENOUGH_CONTRACTIONS: Contraction[] = [
+    {
+        start: subMinutes(now, 75),
+        end: subMinutes(now, 74),
+        pain: 5
+    },
+    {
+        start: subMinutes(now, 68),
+        end: subMinutes(now, 67),
+        pain: 5
+    },
+    {
+        start: subMinutes(now, 61),
+        end: subMinutes(now, 60),
+        pain: 5
+    },
+    {
+        start: subMinutes(now, 54),
+        end: subMinutes(now, 53),
+        pain: 5
+    },
+    {
+        start: subMinutes(now, 47),
+        end: subMinutes(now, 46),
+        pain: 5
+    },
+    {
+        start: subMinutes(now, 40),
+        end: subMinutes(now, 39),
+        pain: 5
+    },
+    {
+        start: subMinutes(now, 33),
+        end: subMinutes(now, 32),
+        pain: 5
+    },
+    {
+        start: subMinutes(now, 26),
+        end: subMinutes(now, 25),
+        pain: 5
+    },
+    {
+        start: subMinutes(now, 19),
+        end: subMinutes(now, 18),
+        pain: 5
+    },
+    {
+        start: subMinutes(now, 12),
+        end: subMinutes(now, 11),
+        pain: 5
+    },
+    {
+        start: subMinutes(now, 5),
+        end: subMinutes(now, 4),
+        pain: 5
+    },
+];
+
+const TOO_LONG_ENOUGH_CONTRACTIONS: Contraction[] = PERFECT_CONTRACTIONS.map(c => {
+    return {
+        ...c,
+        end: addSeconds(c.end, 15)
+    }
+});
+
+const NOT_LONG_ENOUGH_CONTRACTIONS: Contraction[] = PERFECT_CONTRACTIONS.map(c => {
+    return {
+        ...c,
+        end: subSeconds(c.end, 15)
+    }
+});
