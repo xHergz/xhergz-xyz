@@ -1,11 +1,13 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 import clsx from "clsx";
 
 import { BaseProps } from "../../utils/componentUtils";
 
 import styles from "./ImageTile.module.scss";
+import { customLoader } from "../../utils/next.utils";
 
 type ImageTileSize = "small" | "medium" | "large";
 
@@ -36,7 +38,12 @@ const ImageTile = (incomingProps: ImageTileProps): JSX.Element => {
   return (
     <Link id={props.id} href={props.linkTo}>
       <div className={classes}>
-        <img className={styles.tileImage} src={props.imageSource} />
+        <Image
+          className={styles.tileImage}
+          src={props.imageSource}
+          alt={`${props.title} tile image`}
+          loader={customLoader}
+        />
         <span className={styles.tileTitle}>{props.title}</span>
       </div>
     </Link>

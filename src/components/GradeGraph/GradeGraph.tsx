@@ -23,7 +23,7 @@ import {
   LISENT_NA,
   LISENT_PB,
   LISENT_RA,
-} from "../../data/RefineData";
+} from "../../constants/refine-data.constants";
 
 export type GradeGraphProps = { grade: number };
 
@@ -43,15 +43,16 @@ const LISENTS = [
 const GradeGraph: React.FunctionComponent<GradeGraphProps> = (
   props: GradeGraphProps
 ): JSX.Element => {
+  const { grade } = props;
   const data = useMemo(() => {
     return LISENTS.map((lisent) => {
       return {
         lisent: lisent.NAME,
-        values: lisent.DURABILITY[props.grade - 1],
+        values: lisent.DURABILITY[grade - 1],
         color: lisent.COLOUR,
       };
     });
-  }, []);
+  }, [grade]);
   return (
     <div style={{ height: "250px" }}>
       <h6>Grade {props.grade}</h6>

@@ -7,6 +7,7 @@ import { PATHS } from "../../constants/routes.constants";
 import logo from "../../assets/logo.png";
 
 import styles from "../../../styles/App.module.scss";
+import { customLoader } from "../../utils/next.utils";
 
 export type PageWrapperProps = React.PropsWithChildren<{ hideLogos?: boolean }>;
 
@@ -31,6 +32,8 @@ const PageWrapper: React.FunctionComponent<PageWrapperProps> = (
               src={logo.src}
               height={64}
               width={64}
+              alt="left logo"
+              loader={customLoader}
             />
           )}
           <ul className={styles.siteNav}>
@@ -50,6 +53,8 @@ const PageWrapper: React.FunctionComponent<PageWrapperProps> = (
               src={logo.src}
               height={64}
               width={64}
+              alt="right logo"
+              loader={customLoader}
             />
           )}
         </nav>

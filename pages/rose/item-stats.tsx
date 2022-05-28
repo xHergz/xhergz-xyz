@@ -128,6 +128,7 @@ const ItemStats = (): JSX.Element => {
           {ROSE_STATS.map((stat) => {
             return (
               <StatFilter
+                key={stat}
                 className={styles.filterOption}
                 stat={stat}
                 checked={statFilters.includes(stat)}
@@ -146,6 +147,7 @@ const ItemStats = (): JSX.Element => {
 
             return (
               <AppraisalDisplay
+                key={appraisal.index}
                 appraisal={appraisal}
                 available={available}
                 index={showIndex ? appraisal.index : undefined}

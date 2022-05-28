@@ -10,7 +10,7 @@ import {
   YAxis,
 } from "recharts";
 
-import { LisentData } from "../../data/RefineData";
+import { LisentData } from "../../constants/refine-data.constants";
 
 export type LisentGraphProps = { lisent: LisentData };
 
