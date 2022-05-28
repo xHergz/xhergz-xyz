@@ -2,7 +2,7 @@ import React from "react";
 import clsx from "clsx";
 import lodash, { padStart } from "lodash";
 
-import { Appraisal } from "../../constants/rose-stats.constants";
+import { Appraisal } from "../../data/RoseStats";
 
 import styles from "./AppraisalDisplay.module.scss";
 
