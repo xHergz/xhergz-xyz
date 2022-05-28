@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "next build && next export"
+    "export": "next build && next export",
+    "test": "echo \"No tests to run yet\" && exit 0"
   },
   "dependencies": {
     "clsx": "^1.1.1",
