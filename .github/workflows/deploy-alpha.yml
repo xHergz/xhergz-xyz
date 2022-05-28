@@ -18,7 +18,7 @@ jobs:
 
       # Builds the app
       - name: Building the app
-        run: cd $GITHUB_WORKSPACE && npm i && npm run build
+        run: cd $GITHUB_WORKSPACE && npm i --force && npm run build
 
       # Run the tests
       - name: Running the tests
