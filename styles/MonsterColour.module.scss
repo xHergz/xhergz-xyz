@@ -1,0 +1,57 @@
+@import "RoseColours.module.scss";
+
+.divider {
+  margin: 8px 0;
+}
+
+.helpText {
+  color: lightslategrey;
+  font-style: italic;
+}
+
+.colourList {
+  border-radius: 4px;
+}
+
+.nameColour {
+  display: flex;
+  align-items: center;
+  height: 24px;
+  padding: 8px;
+}
+
+.purpleName {
+  background-color: $purpleName;
+}
+
+.pinkName {
+  background-color: $pinkName;
+}
+
+.redName {
+  background-color: $redName;
+}
+
+.orangeName {
+  background-color: $orangeName;
+}
+
+.yellowName {
+  background-color: $yellowName;
+}
+
+.greenName {
+  background-color: $greenName;
+}
+
+.blueName {
+  background-color: $blueName;
+}
+
+.lightBlueName {
+  background-color: $lightBlueName;
+}
+
+.greyName {
+  background-color: $greyName;
+}
