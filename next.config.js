@@ -4,7 +4,7 @@ const nextConfig = {
   images: {
     loader: "custom",
   },
-  exportTrailingSlash: true,
+  trailingSlash: true,
 };
 
 module.exports = nextConfig;
