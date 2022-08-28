@@ -38,7 +38,7 @@ const PasswordGenerator: NextPage = () => {
         </Button>
         {!isNil(generated) ? (
           <>
-            <TextInput label="Generated" value={generated} disabled />
+            <PasswordInput label="Generated" value={generated} disabled />
             <CopyButton value={generated}>
               {({ copied, copy }) => (
                 <Button color={copied ? "teal" : "blue"} onClick={copy}>
