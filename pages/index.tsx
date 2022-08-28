@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 
-import CaptainMoldie from "../src/assets/Captain_Moldie.webp";
+import CaptainMoldie from "../src/assets/Captain_Moldie.png";
 import ImageTile from "../src/components/ImageTile/ImageTile";
 import PageWrapper from "../src/components/PageWrapper/PageWrapper";
 

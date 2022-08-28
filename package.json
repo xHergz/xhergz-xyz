@@ -11,6 +11,10 @@
     "test": "echo \"No tests to run yet\" && exit 0"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.0",
+    "@mantine/core": "^5.2.4",
+    "@mantine/hooks": "^5.2.4",
+    "@tabler/icons": "^1.90.0",
     "clsx": "^1.1.1",
     "date-fns": "^2.28.0",
     "lodash": "^4.17.21",

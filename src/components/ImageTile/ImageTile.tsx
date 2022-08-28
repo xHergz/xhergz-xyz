@@ -40,6 +40,10 @@ const ImageTile = (incomingProps: ImageTileProps): JSX.Element => {
       <div className={classes}>
         <Image
           className={styles.tileImage}
+          width="100%"
+          height="100%"
+          layout="responsive"
+          objectFit="cover"
           src={props.imageSource}
           alt={`${props.title} tile image`}
           loader={customLoader}
