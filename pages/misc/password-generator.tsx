@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { NextPage } from "next";
 
 import PageWrapper from "../../src/components/PageWrapper/PageWrapper";
-import { Button, CopyButton, TextInput } from "@mantine/core";
+import { Button, CopyButton, PasswordInput, TextInput } from "@mantine/core";
 import { isEmpty, isNil } from "lodash";
 import { sha256 } from "../../src/utils/password.utils";
 
@@ -19,7 +19,7 @@ const PasswordGenerator: NextPage = () => {
   return (
     <PageWrapper>
       <div>
-        <TextInput
+        <PasswordInput
           label="Password"
           value={password}
           onChange={(event) => setPassword(event.currentTarget.value)}
