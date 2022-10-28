@@ -10,6 +10,7 @@ const PATHS = {
   MONSTER_COLOUR: "/rose/monster-colour",
   PARTY_EXP: "/rose/party-exp",
   REFINE_DATA: "/rose/refine-data",
+  IDEAS: "/rose/ideas",
 };
 
 const Rose: NextPage = () => {
@@ -28,6 +29,9 @@ const Rose: NextPage = () => {
           </li>
           <li>
             <Link href={PATHS.REFINE_DATA}>Refine Data</Link>
+          </li>
+          <li>
+            <Link href={PATHS.IDEAS}>Ideas</Link>
           </li>
         </ul>
       </div>

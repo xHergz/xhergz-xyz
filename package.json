@@ -22,7 +22,8 @@
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "recharts": "^2.1.10",
-    "sass": "^1.52.1"
+    "sass": "^1.52.1",
+    "tabler-icons-react": "^1.55.0"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.182",
