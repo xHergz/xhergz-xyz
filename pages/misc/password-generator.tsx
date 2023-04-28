@@ -26,7 +26,7 @@ const PasswordGenerator: NextPage = () => {
   return (
     <PageWrapper>
       <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-        <label>Password</label>
+        <label className="text-lg">Password</label>
         <input
           value={password}
           onChange={(event) => setPassword(event.currentTarget.value)}
