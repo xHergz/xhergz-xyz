@@ -5,7 +5,12 @@ import PageWrapper from "../../src/components/PageWrapper/PageWrapper";
 const DropTableMaker: NextPage = () => {
   return (
     <PageWrapper>
-      <div>Hello World</div>
+      <div>
+        <img
+          src="https://www.aruarose.com/public/images/armory/icons/icon_1913.png"
+          alt="rose icon test"
+        />
+      </div>
     </PageWrapper>
   );
 };
