@@ -11,7 +11,33 @@ type RoseItemClassification =
   | "leather"
   | "cloth"
   | "woodenMaterial"
-  | "stoneMaterial";
+  | "stoneMaterial"
+  | "gem"
+  | "hat"
+  | "helmet"
+  | "magicHat"
+  | "casualClothes"
+  | "combatUniforms"
+  | "magicClothes"
+  | "gloves"
+  | "gauntlets"
+  | "magicGloves"
+  | "shoes"
+  | "boots"
+  | "magicBoots"
+  | "blunts"
+  | "oneHandedSwords"
+  | "axes"
+  | "duals"
+  | "katars"
+  | "spears"
+  | "twoHandedSwords"
+  | "staffs"
+  | "wands"
+  | "bows"
+  | "crossbows"
+  | "guns"
+  | "launchers";
 
 type RoseItemGroup =
   | "junonMaterials"
@@ -20,12 +46,16 @@ type RoseItemGroup =
   | "consumables"
   | "refines"
   | "otherMaterials"
-  | "resources";
+  | "resources"
+  | "gems"
+  | "104sets"
+  | "120sets"
+  | "weapons";
 
 type Item = {
   id: number;
   name: string;
-  icon_id: number;
+  iconId: number;
   type: RoseItemType;
   classification: RoseItemClassification;
   group: RoseItemGroup;
@@ -35,7 +65,7 @@ const CHEMICALS: Item[] = [
   {
     id: 12081,
     name: "Lisent (Fe)",
-    icon_id: 1014,
+    iconId: 1014,
     type: "etc",
     classification: "chemical",
     group: "refines",
@@ -43,7 +73,7 @@ const CHEMICALS: Item[] = [
   {
     id: 12082,
     name: "Lisent (Cu)",
-    icon_id: 1015,
+    iconId: 1015,
     type: "etc",
     classification: "chemical",
     group: "refines",
@@ -51,7 +81,7 @@ const CHEMICALS: Item[] = [
   {
     id: 12083,
     name: "Lisent (Pb)",
-    icon_id: 1016,
+    iconId: 1016,
     type: "etc",
     classification: "chemical",
     group: "refines",
@@ -59,7 +89,7 @@ const CHEMICALS: Item[] = [
   {
     id: 12084,
     name: "Lisent (Al)",
-    icon_id: 1017,
+    iconId: 1017,
     type: "etc",
     classification: "chemical",
     group: "refines",
@@ -67,7 +97,7 @@ const CHEMICALS: Item[] = [
   {
     id: 12085,
     name: "Lisent (Hg)",
-    icon_id: 1018,
+    iconId: 1018,
     type: "etc",
     classification: "chemical",
     group: "refines",
@@ -75,7 +105,7 @@ const CHEMICALS: Item[] = [
   {
     id: 12086,
     name: "Lisent (Na)",
-    icon_id: 1019,
+    iconId: 1019,
     type: "etc",
     classification: "chemical",
     group: "refines",
@@ -83,7 +113,7 @@ const CHEMICALS: Item[] = [
   {
     id: 12087,
     name: "Lisent (Cr)",
-    icon_id: 1020,
+    iconId: 1020,
     type: "etc",
     classification: "chemical",
     group: "refines",
@@ -91,7 +121,7 @@ const CHEMICALS: Item[] = [
   {
     id: 12088,
     name: "Lisent (Au)",
-    icon_id: 1021,
+    iconId: 1021,
     type: "etc",
     classification: "chemical",
     group: "refines",
@@ -99,7 +129,7 @@ const CHEMICALS: Item[] = [
   {
     id: 12109,
     name: "Lisent (Ag)",
-    icon_id: 1532,
+    iconId: 1532,
     type: "etc",
     classification: "chemical",
     group: "refines",
@@ -110,7 +140,7 @@ const MAGIC_ITEMS: Item[] = [
   {
     id: 10384,
     name: "Storm Charm",
-    icon_id: 1779,
+    iconId: 1779,
     type: "consumable",
     classification: "magicItem",
     group: "consumables",
@@ -121,7 +151,7 @@ const MATERIALS: Item[] = [
   {
     id: 12116,
     name: "Netil",
-    icon_id: 1924,
+    iconId: 1924,
     type: "etc",
     classification: "material",
     group: "otherMaterials",
@@ -129,7 +159,7 @@ const MATERIALS: Item[] = [
   {
     id: 12117,
     name: "Metil",
-    icon_id: 1925,
+    iconId: 1925,
     type: "etc",
     classification: "material",
     group: "otherMaterials",
@@ -137,7 +167,7 @@ const MATERIALS: Item[] = [
   {
     id: 12118,
     name: "Etil",
-    icon_id: 1926,
+    iconId: 1926,
     type: "etc",
     classification: "material",
     group: "otherMaterials",
@@ -145,7 +175,7 @@ const MATERIALS: Item[] = [
   {
     id: 12119,
     name: "Petil",
-    icon_id: 1927,
+    iconId: 1927,
     type: "etc",
     classification: "material",
     group: "otherMaterials",
@@ -153,7 +183,7 @@ const MATERIALS: Item[] = [
   {
     id: 12120,
     name: "Setil",
-    icon_id: 1928,
+    iconId: 1928,
     type: "etc",
     classification: "material",
     group: "otherMaterials",
@@ -161,7 +191,7 @@ const MATERIALS: Item[] = [
   {
     id: 12151,
     name: "Black Heart",
-    icon_id: 1911,
+    iconId: 1911,
     type: "etc",
     classification: "material",
     group: "otherMaterials",
@@ -169,7 +199,7 @@ const MATERIALS: Item[] = [
   {
     id: 12152,
     name: "Green Heart",
-    icon_id: 1912,
+    iconId: 1912,
     type: "etc",
     classification: "material",
     group: "otherMaterials",
@@ -177,7 +207,7 @@ const MATERIALS: Item[] = [
   {
     id: 12153,
     name: "Blue Heart",
-    icon_id: 1913,
+    iconId: 1913,
     type: "etc",
     classification: "material",
     group: "otherMaterials",
@@ -185,7 +215,7 @@ const MATERIALS: Item[] = [
   {
     id: 12154,
     name: "Pink Heart",
-    icon_id: 1914,
+    iconId: 1914,
     type: "etc",
     classification: "material",
     group: "otherMaterials",
@@ -193,7 +223,7 @@ const MATERIALS: Item[] = [
   {
     id: 12155,
     name: "Red Heart",
-    icon_id: 1915,
+    iconId: 1915,
     type: "etc",
     classification: "material",
     group: "otherMaterials",
@@ -201,7 +231,7 @@ const MATERIALS: Item[] = [
   {
     id: 12156,
     name: "Golden Heart",
-    icon_id: 1916,
+    iconId: 1916,
     type: "etc",
     classification: "material",
     group: "otherMaterials",
@@ -209,7 +239,7 @@ const MATERIALS: Item[] = [
   {
     id: 12157,
     name: "White Heart",
-    icon_id: 1917,
+    iconId: 1917,
     type: "etc",
     classification: "material",
     group: "otherMaterials",
@@ -217,7 +247,7 @@ const MATERIALS: Item[] = [
   {
     id: 12161,
     name: "Green Crystal",
-    icon_id: 1963,
+    iconId: 1963,
     type: "etc",
     classification: "material",
     group: "otherMaterials",
@@ -225,7 +255,7 @@ const MATERIALS: Item[] = [
   {
     id: 12162,
     name: "Blue Crystal",
-    icon_id: 1964,
+    iconId: 1964,
     type: "etc",
     classification: "material",
     group: "otherMaterials",
@@ -233,7 +263,7 @@ const MATERIALS: Item[] = [
   {
     id: 12163,
     name: "Red Crystal",
-    icon_id: 1965,
+    iconId: 1965,
     type: "etc",
     classification: "material",
     group: "otherMaterials",
@@ -241,7 +271,7 @@ const MATERIALS: Item[] = [
   {
     id: 12164,
     name: "White Crystal",
-    icon_id: 1966,
+    iconId: 1966,
     type: "etc",
     classification: "material",
     group: "otherMaterials",
@@ -249,7 +279,7 @@ const MATERIALS: Item[] = [
   {
     id: 12170,
     name: "Hook Wind Piece",
-    icon_id: 5362,
+    iconId: 5362,
     type: "etc",
     classification: "material",
     group: "eldeonMaterials",
@@ -257,7 +287,7 @@ const MATERIALS: Item[] = [
   {
     id: 12176,
     name: "Insect Leg",
-    icon_id: 1974,
+    iconId: 1974,
     type: "etc",
     classification: "material",
     group: "junonMaterials",
@@ -265,7 +295,7 @@ const MATERIALS: Item[] = [
   {
     id: 12177,
     name: "Insect Wing",
-    icon_id: 1976,
+    iconId: 1976,
     type: "etc",
     classification: "material",
     group: "junonMaterials",
@@ -273,7 +303,7 @@ const MATERIALS: Item[] = [
   {
     id: 12191,
     name: "Animal Leg Bone",
-    icon_id: 1991,
+    iconId: 1991,
     type: "etc",
     classification: "material",
     group: "junonMaterials",
@@ -281,7 +311,7 @@ const MATERIALS: Item[] = [
   {
     id: 12192,
     name: "Animal Backbone",
-    icon_id: 1992,
+    iconId: 1992,
     type: "etc",
     classification: "material",
     group: "junonMaterials",
@@ -289,7 +319,7 @@ const MATERIALS: Item[] = [
   {
     id: 12271,
     name: "Sharp Thorn",
-    icon_id: 2139,
+    iconId: 2139,
     type: "etc",
     classification: "material",
     group: "eldeonMaterials",
@@ -297,7 +327,7 @@ const MATERIALS: Item[] = [
   {
     id: 12272,
     name: "Noctilucent Leaf",
-    icon_id: 2137,
+    iconId: 2137,
     type: "etc",
     classification: "material",
     group: "eldeonMaterials",
@@ -305,7 +335,7 @@ const MATERIALS: Item[] = [
   {
     id: 12278,
     name: "Spider Web",
-    icon_id: 2138,
+    iconId: 2138,
     type: "etc",
     classification: "material",
     group: "eldeonMaterials",
@@ -313,7 +343,7 @@ const MATERIALS: Item[] = [
   {
     id: 12279,
     name: "Killer Leaf",
-    icon_id: 2136,
+    iconId: 2136,
     type: "etc",
     classification: "material",
     group: "eldeonMaterials",
@@ -321,7 +351,7 @@ const MATERIALS: Item[] = [
   {
     id: 12280,
     name: "Paper Wing Pieces",
-    icon_id: 2134,
+    iconId: 2134,
     type: "etc",
     classification: "material",
     group: "eldeonMaterials",
@@ -329,7 +359,7 @@ const MATERIALS: Item[] = [
   {
     id: 12281,
     name: "Plasma",
-    icon_id: 2133,
+    iconId: 2133,
     type: "etc",
     classification: "material",
     group: "eldeonMaterials",
@@ -337,7 +367,7 @@ const MATERIALS: Item[] = [
   {
     id: 12282,
     name: "Sikuku Costume",
-    icon_id: 2140,
+    iconId: 2140,
     type: "etc",
     classification: "material",
     group: "eldeonMaterials",
@@ -345,7 +375,7 @@ const MATERIALS: Item[] = [
   {
     id: 12999,
     name: "Mad Honey",
-    icon_id: 1604,
+    iconId: 1604,
     type: "etc",
     classification: "material",
     group: "eldeonMaterials",
@@ -356,7 +386,7 @@ const CLOTHS: Item[] = [
   {
     id: 12051,
     name: "Tough Cloth",
-    icon_id: 1820,
+    iconId: 1820,
     type: "etc",
     classification: "cloth",
     group: "resources",
@@ -364,7 +394,7 @@ const CLOTHS: Item[] = [
   {
     id: 12052,
     name: "Cotton",
-    icon_id: 1821,
+    iconId: 1821,
     type: "etc",
     classification: "cloth",
     group: "resources",
@@ -372,7 +402,7 @@ const CLOTHS: Item[] = [
   {
     id: 12053,
     name: "Linen",
-    icon_id: 1822,
+    iconId: 1822,
     type: "etc",
     classification: "cloth",
     group: "resources",
@@ -380,7 +410,7 @@ const CLOTHS: Item[] = [
   {
     id: 12054,
     name: "Felt",
-    icon_id: 1823,
+    iconId: 1823,
     type: "etc",
     classification: "cloth",
     group: "resources",
@@ -388,7 +418,7 @@ const CLOTHS: Item[] = [
   {
     id: 12055,
     name: "Silk",
-    icon_id: 1824,
+    iconId: 1824,
     type: "etc",
     classification: "cloth",
     group: "resources",
@@ -396,7 +426,7 @@ const CLOTHS: Item[] = [
   {
     id: 12056,
     name: "Wool",
-    icon_id: 1825,
+    iconId: 1825,
     type: "etc",
     classification: "cloth",
     group: "resources",
@@ -404,7 +434,7 @@ const CLOTHS: Item[] = [
   {
     id: 12057,
     name: "Denim",
-    icon_id: 1826,
+    iconId: 1826,
     type: "etc",
     classification: "cloth",
     group: "resources",
@@ -412,7 +442,7 @@ const CLOTHS: Item[] = [
   {
     id: 12058,
     name: "Plain Weave",
-    icon_id: 1827,
+    iconId: 1827,
     type: "etc",
     classification: "cloth",
     group: "resources",
@@ -420,7 +450,7 @@ const CLOTHS: Item[] = [
   {
     id: 12059,
     name: "Twill",
-    icon_id: 1828,
+    iconId: 1828,
     type: "etc",
     classification: "cloth",
     group: "resources",
@@ -428,7 +458,7 @@ const CLOTHS: Item[] = [
   {
     id: 12060,
     name: "Lace",
-    icon_id: 1829,
+    iconId: 1829,
     type: "etc",
     classification: "cloth",
     group: "resources",
@@ -439,7 +469,7 @@ const LEATHERS: Item[] = [
   {
     id: 12041,
     name: "Worn-out Leather",
-    icon_id: 1807,
+    iconId: 1807,
     type: "etc",
     classification: "leather",
     group: "resources",
@@ -447,7 +477,7 @@ const LEATHERS: Item[] = [
   {
     id: 12042,
     name: "Thin Leather",
-    icon_id: 1808,
+    iconId: 1808,
     type: "etc",
     classification: "leather",
     group: "resources",
@@ -455,7 +485,7 @@ const LEATHERS: Item[] = [
   {
     id: 12043,
     name: "Sleek Leather",
-    icon_id: 1809,
+    iconId: 1809,
     type: "etc",
     classification: "leather",
     group: "resources",
@@ -463,7 +493,7 @@ const LEATHERS: Item[] = [
   {
     id: 12044,
     name: "Tough Leather",
-    icon_id: 1810,
+    iconId: 1810,
     type: "etc",
     classification: "leather",
     group: "resources",
@@ -471,7 +501,7 @@ const LEATHERS: Item[] = [
   {
     id: 12045,
     name: "Tender Leather",
-    icon_id: 1811,
+    iconId: 1811,
     type: "etc",
     classification: "leather",
     group: "resources",
@@ -479,7 +509,7 @@ const LEATHERS: Item[] = [
   {
     id: 12046,
     name: "Gorgeous Leather",
-    icon_id: 1812,
+    iconId: 1812,
     type: "etc",
     classification: "leather",
     group: "resources",
@@ -487,7 +517,7 @@ const LEATHERS: Item[] = [
   {
     id: 12047,
     name: "Thick Leather",
-    icon_id: 1813,
+    iconId: 1813,
     type: "etc",
     classification: "leather",
     group: "resources",
@@ -495,7 +525,7 @@ const LEATHERS: Item[] = [
   {
     id: 12048,
     name: "Hard Leather",
-    icon_id: 1814,
+    iconId: 1814,
     type: "etc",
     classification: "leather",
     group: "resources",
@@ -503,7 +533,7 @@ const LEATHERS: Item[] = [
   {
     id: 12049,
     name: "Transparent Leather",
-    icon_id: 1815,
+    iconId: 1815,
     type: "etc",
     classification: "leather",
     group: "resources",
@@ -511,7 +541,7 @@ const LEATHERS: Item[] = [
   {
     id: 12050,
     name: "Patterned Leather",
-    icon_id: 1816,
+    iconId: 1816,
     type: "etc",
     classification: "leather",
     group: "resources",
@@ -522,7 +552,7 @@ const METALS: Item[] = [
   {
     id: 12001,
     name: "Rusted Iron",
-    icon_id: 1755,
+    iconId: 1755,
     type: "etc",
     classification: "metal",
     group: "resources",
@@ -530,7 +560,7 @@ const METALS: Item[] = [
   {
     id: 12002,
     name: "Tin",
-    icon_id: 1756,
+    iconId: 1756,
     type: "etc",
     classification: "metal",
     group: "resources",
@@ -538,7 +568,7 @@ const METALS: Item[] = [
   {
     id: 12003,
     name: "Copper",
-    icon_id: 1757,
+    iconId: 1757,
     type: "etc",
     classification: "metal",
     group: "resources",
@@ -546,7 +576,7 @@ const METALS: Item[] = [
   {
     id: 12004,
     name: "Bronze",
-    icon_id: 1758,
+    iconId: 1758,
     type: "etc",
     classification: "metal",
     group: "resources",
@@ -554,7 +584,7 @@ const METALS: Item[] = [
   {
     id: 12005,
     name: "Iron",
-    icon_id: 1759,
+    iconId: 1759,
     type: "etc",
     classification: "metal",
     group: "resources",
@@ -562,7 +592,7 @@ const METALS: Item[] = [
   {
     id: 12006,
     name: "Silver Iron",
-    icon_id: 1760,
+    iconId: 1760,
     type: "etc",
     classification: "metal",
     group: "resources",
@@ -570,7 +600,7 @@ const METALS: Item[] = [
   {
     id: 12007,
     name: "Steel",
-    icon_id: 1761,
+    iconId: 1761,
     type: "etc",
     classification: "metal",
     group: "resources",
@@ -578,7 +608,7 @@ const METALS: Item[] = [
   {
     id: 12008,
     name: "Chromium",
-    icon_id: 1762,
+    iconId: 1762,
     type: "etc",
     classification: "metal",
     group: "resources",
@@ -586,7 +616,7 @@ const METALS: Item[] = [
   {
     id: 12009,
     name: "Tiar",
-    icon_id: 1763,
+    iconId: 1763,
     type: "etc",
     classification: "metal",
     group: "resources",
@@ -594,7 +624,7 @@ const METALS: Item[] = [
   {
     id: 12010,
     name: "Damascus",
-    icon_id: 1764,
+    iconId: 1764,
     type: "etc",
     classification: "metal",
     group: "resources",
@@ -605,7 +635,7 @@ const OTHERWORLDLY_METALS: Item[] = [
   {
     id: 12011,
     name: "Unprocessed Metal",
-    icon_id: 1768,
+    iconId: 1768,
     type: "etc",
     classification: "otherworldlyMetal",
     group: "resources",
@@ -613,7 +643,7 @@ const OTHERWORLDLY_METALS: Item[] = [
   {
     id: 12012,
     name: "Demon Metal",
-    icon_id: 1769,
+    iconId: 1769,
     type: "etc",
     classification: "otherworldlyMetal",
     group: "resources",
@@ -621,7 +651,7 @@ const OTHERWORLDLY_METALS: Item[] = [
   {
     id: 12013,
     name: "Wolf Steel",
-    icon_id: 1770,
+    iconId: 1770,
     type: "etc",
     classification: "otherworldlyMetal",
     group: "resources",
@@ -629,7 +659,7 @@ const OTHERWORLDLY_METALS: Item[] = [
   {
     id: 12014,
     name: "Molive",
-    icon_id: 1771,
+    iconId: 1771,
     type: "etc",
     classification: "otherworldlyMetal",
     group: "resources",
@@ -637,7 +667,7 @@ const OTHERWORLDLY_METALS: Item[] = [
   {
     id: 12015,
     name: "Mythril",
-    icon_id: 1772,
+    iconId: 1772,
     type: "etc",
     classification: "otherworldlyMetal",
     group: "resources",
@@ -645,7 +675,7 @@ const OTHERWORLDLY_METALS: Item[] = [
   {
     id: 12016,
     name: "Orihalcon",
-    icon_id: 1773,
+    iconId: 1773,
     type: "etc",
     classification: "otherworldlyMetal",
     group: "resources",
@@ -653,7 +683,7 @@ const OTHERWORLDLY_METALS: Item[] = [
   {
     id: 12017,
     name: "Adamantium",
-    icon_id: 1774,
+    iconId: 1774,
     type: "etc",
     classification: "otherworldlyMetal",
     group: "resources",
@@ -661,7 +691,7 @@ const OTHERWORLDLY_METALS: Item[] = [
   {
     id: 12018,
     name: "Otherworldly Metal",
-    icon_id: 1775,
+    iconId: 1775,
     type: "etc",
     classification: "otherworldlyMetal",
     group: "resources",
@@ -669,7 +699,7 @@ const OTHERWORLDLY_METALS: Item[] = [
   {
     id: 12019,
     name: "Philosopher Stone",
-    icon_id: 1776,
+    iconId: 1776,
     type: "etc",
     classification: "otherworldlyMetal",
     group: "resources",
@@ -677,7 +707,7 @@ const OTHERWORLDLY_METALS: Item[] = [
   {
     id: 12020,
     name: "Mercury",
-    icon_id: 1777,
+    iconId: 1777,
     type: "etc",
     classification: "otherworldlyMetal",
     group: "resources",
@@ -688,7 +718,7 @@ const STONE_MATERIALS: Item[] = [
   {
     id: 12025,
     name: "Granite",
-    icon_id: 1785,
+    iconId: 1785,
     type: "etc",
     classification: "stoneMaterial",
     group: "resources",
@@ -696,7 +726,7 @@ const STONE_MATERIALS: Item[] = [
   {
     id: 12026,
     name: "Marble",
-    icon_id: 1786,
+    iconId: 1786,
     type: "etc",
     classification: "stoneMaterial",
     group: "resources",
@@ -707,7 +737,7 @@ const WOODEN_MATERIALS: Item[] = [
   {
     id: 12031,
     name: "Twig",
-    icon_id: 1794,
+    iconId: 1794,
     type: "etc",
     classification: "woodenMaterial",
     group: "resources",
@@ -715,7 +745,7 @@ const WOODEN_MATERIALS: Item[] = [
   {
     id: 12032,
     name: "Maple Wood",
-    icon_id: 1795,
+    iconId: 1795,
     type: "etc",
     classification: "woodenMaterial",
     group: "resources",
@@ -723,7 +753,7 @@ const WOODEN_MATERIALS: Item[] = [
   {
     id: 12033,
     name: "Aromatic Wood",
-    icon_id: 1796,
+    iconId: 1796,
     type: "etc",
     classification: "woodenMaterial",
     group: "resources",
@@ -731,7 +761,7 @@ const WOODEN_MATERIALS: Item[] = [
   {
     id: 12034,
     name: "Oak Wood",
-    icon_id: 17797,
+    iconId: 17797,
     type: "etc",
     classification: "woodenMaterial",
     group: "resources",
@@ -739,7 +769,7 @@ const WOODEN_MATERIALS: Item[] = [
   {
     id: 12035,
     name: "Paulownia Wood",
-    icon_id: 1798,
+    iconId: 1798,
     type: "etc",
     classification: "woodenMaterial",
     group: "resources",
@@ -747,7 +777,7 @@ const WOODEN_MATERIALS: Item[] = [
   {
     id: 12036,
     name: "Pine Wood",
-    icon_id: 1799,
+    iconId: 1799,
     type: "etc",
     classification: "woodenMaterial",
     group: "resources",
@@ -755,7 +785,7 @@ const WOODEN_MATERIALS: Item[] = [
   {
     id: 12037,
     name: "Cinnamon Wood",
-    icon_id: 1800,
+    iconId: 1800,
     type: "etc",
     classification: "woodenMaterial",
     group: "resources",
@@ -763,7 +793,7 @@ const WOODEN_MATERIALS: Item[] = [
   {
     id: 12038,
     name: "Red Sandalwood",
-    icon_id: 1801,
+    iconId: 1801,
     type: "etc",
     classification: "woodenMaterial",
     group: "resources",
@@ -771,7 +801,7 @@ const WOODEN_MATERIALS: Item[] = [
   {
     id: 12029,
     name: "Otherworldly Wood",
-    icon_id: 1802,
+    iconId: 1802,
     type: "etc",
     classification: "woodenMaterial",
     group: "resources",
@@ -779,7 +809,7 @@ const WOODEN_MATERIALS: Item[] = [
   {
     id: 12030,
     name: "Sephiroth Wood",
-    icon_id: 1803,
+    iconId: 1803,
     type: "etc",
     classification: "woodenMaterial",
     group: "resources",
@@ -790,7 +820,7 @@ const POTIONS: Item[] = [
   {
     id: 10056,
     name: "Vital Jam (+1)",
-    icon_id: 5265,
+    iconId: 5265,
     type: "consumable",
     classification: "potion",
     group: "consumables",
@@ -798,7 +828,7 @@ const POTIONS: Item[] = [
   {
     id: 10057,
     name: "Vital Jam (+2)",
-    icon_id: 5266,
+    iconId: 5266,
     type: "consumable",
     classification: "potion",
     group: "consumables",
@@ -806,7 +836,7 @@ const POTIONS: Item[] = [
   {
     id: 10058,
     name: "Vital Jam (+5)",
-    icon_id: 5267,
+    iconId: 5267,
     type: "consumable",
     classification: "potion",
     group: "consumables",
@@ -817,7 +847,7 @@ const REFINES: Item[] = [
   {
     id: 12061,
     name: "Low Essence",
-    icon_id: 1833,
+    iconId: 1833,
     type: "etc",
     classification: "refiningMaterial",
     group: "refines",
@@ -825,7 +855,7 @@ const REFINES: Item[] = [
   {
     id: 12062,
     name: "Essence",
-    icon_id: 1834,
+    iconId: 1834,
     type: "etc",
     classification: "refiningMaterial",
     group: "refines",
@@ -833,7 +863,7 @@ const REFINES: Item[] = [
   {
     id: 12063,
     name: "Low Ether",
-    icon_id: 1835,
+    iconId: 1835,
     type: "etc",
     classification: "refiningMaterial",
     group: "refines",
@@ -841,7 +871,7 @@ const REFINES: Item[] = [
   {
     id: 12064,
     name: "Ether",
-    icon_id: 1836,
+    iconId: 1836,
     type: "etc",
     classification: "refiningMaterial",
     group: "refines",
@@ -849,7 +879,7 @@ const REFINES: Item[] = [
   {
     id: 12065,
     name: "High Ether",
-    icon_id: 1837,
+    iconId: 1837,
     type: "etc",
     classification: "refiningMaterial",
     group: "refines",
@@ -857,7 +887,7 @@ const REFINES: Item[] = [
   {
     id: 12066,
     name: "Elixir",
-    icon_id: 1838,
+    iconId: 1838,
     type: "etc",
     classification: "refiningMaterial",
     group: "refines",
@@ -865,7 +895,7 @@ const REFINES: Item[] = [
   {
     id: 12067,
     name: "Hime",
-    icon_id: 1839,
+    iconId: 1839,
     type: "etc",
     classification: "refiningMaterial",
     group: "refines",
@@ -873,7 +903,7 @@ const REFINES: Item[] = [
   {
     id: 12068,
     name: "Low Enthiric",
-    icon_id: 1840,
+    iconId: 1840,
     type: "etc",
     classification: "refiningMaterial",
     group: "refines",
@@ -881,11 +911,746 @@ const REFINES: Item[] = [
   {
     id: 12069,
     name: "Enthiric",
-    icon_id: 1841,
+    iconId: 1841,
     type: "etc",
     classification: "refiningMaterial",
     group: "refines",
   },
 ];
 
-const GEMS: Item[] = [];
+const GEMS: Item[] = [
+  {
+    id: 11301,
+    name: "Garnet [1]",
+    iconId: 1409,
+    type: "etc",
+    classification: "gem",
+    group: "gems",
+  },
+  {
+    id: 11302,
+    name: "Garnet [2]",
+    iconId: 1410,
+    type: "etc",
+    classification: "gem",
+    group: "gems",
+  },
+  {
+    id: 11303,
+    name: "Garnet [3]",
+    iconId: 1411,
+    type: "etc",
+    classification: "gem",
+    group: "gems",
+  },
+  {
+    id: 11311,
+    name: "Ruby [1]",
+    iconId: 1435,
+    type: "etc",
+    classification: "gem",
+    group: "gems",
+  },
+  {
+    id: 11312,
+    name: "Ruby [2]",
+    iconId: 1436,
+    type: "etc",
+    classification: "gem",
+    group: "gems",
+  },
+  {
+    id: 11313,
+    name: "Ruby [3]",
+    iconId: 1437,
+    type: "etc",
+    classification: "gem",
+    group: "gems",
+  },
+  {
+    id: 11321,
+    name: "Sapphire [1]",
+    iconId: 1461,
+    type: "etc",
+    classification: "gem",
+    group: "gems",
+  },
+  {
+    id: 11322,
+    name: "Sapphire [2]",
+    iconId: 1462,
+    type: "etc",
+    classification: "gem",
+    group: "gems",
+  },
+  {
+    id: 11323,
+    name: "Sapphire [3]",
+    iconId: 1463,
+    type: "etc",
+    classification: "gem",
+    group: "gems",
+  },
+  {
+    id: 11331,
+    name: "Topaz [1]",
+    iconId: 1448,
+    type: "etc",
+    classification: "gem",
+    group: "gems",
+  },
+  {
+    id: 11332,
+    name: "Topaz [2]",
+    iconId: 1449,
+    type: "etc",
+    classification: "gem",
+    group: "gems",
+  },
+  {
+    id: 11333,
+    name: "Topaz [3]",
+    iconId: 1450,
+    type: "etc",
+    classification: "gem",
+    group: "gems",
+  },
+  {
+    id: 11341,
+    name: "Emerald [1]",
+    iconId: 1487,
+    type: "etc",
+    classification: "gem",
+    group: "gems",
+  },
+  {
+    id: 11342,
+    name: "Emerald [2]",
+    iconId: 1488,
+    type: "etc",
+    classification: "gem",
+    group: "gems",
+  },
+  {
+    id: 11343,
+    name: "Emerald [3]",
+    iconId: 1489,
+    type: "etc",
+    classification: "gem",
+    group: "gems",
+  },
+  {
+    id: 11351,
+    name: "Peridot [1]",
+    iconId: 1474,
+    type: "etc",
+    classification: "gem",
+    group: "gems",
+  },
+  {
+    id: 11352,
+    name: "Peridot [2]",
+    iconId: 1475,
+    type: "etc",
+    classification: "gem",
+    group: "gems",
+  },
+  {
+    id: 11353,
+    name: "Peridot [3]",
+    iconId: 1476,
+    type: "etc",
+    classification: "gem",
+    group: "gems",
+  },
+  {
+    id: 11361,
+    name: "Diamond [1]",
+    iconId: 1404,
+    type: "etc",
+    classification: "gem",
+    group: "gems",
+  },
+  {
+    id: 11362,
+    name: "Diamond [2]",
+    iconId: 1405,
+    type: "etc",
+    classification: "gem",
+    group: "gems",
+  },
+  {
+    id: 11363,
+    name: "Diamond [3]",
+    iconId: 1406,
+    type: "etc",
+    classification: "gem",
+    group: "gems",
+  },
+  {
+    id: 11371,
+    name: "Pink Opal [1]",
+    iconId: 1734,
+    type: "etc",
+    classification: "gem",
+    group: "gems",
+  },
+  {
+    id: 11372,
+    name: "Pink Opal [2]",
+    iconId: 1735,
+    type: "etc",
+    classification: "gem",
+    group: "gems",
+  },
+  {
+    id: 11373,
+    name: "Pink Opal [3]",
+    iconId: 1736,
+    type: "etc",
+    classification: "gem",
+    group: "gems",
+  },
+  {
+    id: 11381,
+    name: "Amethyst [1]",
+    iconId: 1726,
+    type: "etc",
+    classification: "gem",
+    group: "gems",
+  },
+  {
+    id: 11382,
+    name: "Amethyst [2]",
+    iconId: 1727,
+    type: "etc",
+    classification: "gem",
+    group: "gems",
+  },
+  {
+    id: 11383,
+    name: "Amethyst [3]",
+    iconId: 1729,
+    type: "etc",
+    classification: "gem",
+    group: "gems",
+  },
+  {
+    id: 11391,
+    name: "Black Onyx [1]",
+    iconId: 1791,
+    type: "etc",
+    classification: "gem",
+    group: "gems",
+  },
+  {
+    id: 11392,
+    name: "Black Onyx [2]",
+    iconId: 1792,
+    type: "etc",
+    classification: "gem",
+    group: "gems",
+  },
+  {
+    id: 11393,
+    name: "Black Onyx [3]",
+    iconId: 1805,
+    type: "etc",
+    classification: "gem",
+    group: "gems",
+  },
+];
+
+const ARMOR: Item[] = [
+  {
+    id: 2096,
+    name: "Jaguar Hat",
+    iconId: 187,
+    type: "equipment",
+    classification: "hat",
+    group: "104sets",
+  },
+  {
+    id: 4096,
+    name: "Jaguar Armor",
+    iconId: 369,
+    type: "equipment",
+    classification: "gloves",
+    group: "104sets",
+  },
+  {
+    id: 2096,
+    name: "Jaguar Gloves",
+    iconId: 525,
+    type: "equipment",
+    classification: "hat",
+    group: "104sets",
+  },
+  {
+    id: 2096,
+    name: "Jaguar Boots",
+    iconId: 681,
+    type: "equipment",
+    classification: "hat",
+    group: "104sets",
+  },
+  {
+    id: 2097,
+    name: "Wild Hawker Hat",
+    iconId: 188,
+    type: "equipment",
+    classification: "hat",
+    group: "120sets",
+  },
+  {
+    id: 2097,
+    name: "Wild Hawker Chest",
+    iconId: 370,
+    type: "equipment",
+    classification: "hat",
+    group: "120sets",
+  },
+  {
+    id: 4097,
+    name: "Wild Hawker Gloves",
+    iconId: 526,
+    type: "equipment",
+    classification: "gloves",
+    group: "120sets",
+  },
+  {
+    id: 2097,
+    name: "Wild Hawker Boots",
+    iconId: 682,
+    type: "equipment",
+    classification: "hat",
+    group: "120sets",
+  },
+  {
+    id: 2126,
+    name: "Rich Merchant Turban",
+    iconId: 213,
+    type: "equipment",
+    classification: "hat",
+    group: "104sets",
+  },
+  {
+    id: 3126,
+    name: "Rich Merchant Vest",
+    iconId: 395,
+    type: "equipment",
+    classification: "casualClothes",
+    group: "104sets",
+  },
+  {
+    id: 4126,
+    name: "Rich Merchant Gloves",
+    iconId: 551,
+    type: "equipment",
+    classification: "gloves",
+    group: "104sets",
+  },
+  {
+    id: 4126,
+    name: "Rich Merchant Boots",
+    iconId: 707,
+    type: "equipment",
+    classification: "shoes",
+    group: "104sets",
+  },
+  {
+    id: 2127,
+    name: "Redfield Chairman Hat",
+    iconId: 214,
+    type: "equipment",
+    classification: "hat",
+    group: "120sets",
+  },
+  {
+    id: 3127,
+    name: "Redfield Chairman Suit",
+    iconId: 396,
+    type: "equipment",
+    classification: "casualClothes",
+    group: "120sets",
+  },
+  {
+    id: 4127,
+    name: "Redfield Chairman Gloves",
+    iconId: 552,
+    type: "equipment",
+    classification: "gloves",
+    group: "120sets",
+  },
+  {
+    id: 5127,
+    name: "Redfield Chairman Shoes",
+    iconId: 708,
+    type: "equipment",
+    classification: "shoes",
+    group: "120sets",
+  },
+  {
+    id: 2036,
+    name: "Kurash Helm",
+    iconId: 122,
+    type: "equipment",
+    classification: "helmet",
+    group: "104sets",
+  },
+  {
+    id: 3036,
+    name: "Kurash Armor",
+    iconId: 304,
+    type: "equipment",
+    classification: "combatUniforms",
+    group: "104sets",
+  },
+  {
+    id: 4036,
+    name: "Kurash Gauntlets",
+    iconId: 460,
+    type: "equipment",
+    classification: "gauntlets",
+    group: "104sets",
+  },
+  {
+    id: 5036,
+    name: "Kurash Boots",
+    iconId: 616,
+    type: "equipment",
+    classification: "boots",
+    group: "104sets",
+  },
+  {
+    id: 2037,
+    name: "Plate Helm",
+    iconId: 123,
+    type: "equipment",
+    classification: "helmet",
+    group: "120sets",
+  },
+  {
+    id: 3037,
+    name: "Plate Armor",
+    iconId: 305,
+    type: "equipment",
+    classification: "combatUniforms",
+    group: "120sets",
+  },
+  {
+    id: 4037,
+    name: "Plate Gauntlets",
+    iconId: 461,
+    type: "equipment",
+    classification: "gauntlets",
+    group: "120sets",
+  },
+  {
+    id: 5037,
+    name: "Plate Boots",
+    iconId: 617,
+    type: "equipment",
+    classification: "boots",
+    group: "120sets",
+  },
+  {
+    id: 2066,
+    name: "Velvet Hat of Witch",
+    iconId: 148,
+    type: "equipment",
+    classification: "magicHat",
+    group: "104sets",
+  },
+  {
+    id: 3066,
+    name: "Velvet Coat of Witch",
+    iconId: 343,
+    type: "equipment",
+    classification: "magicClothes",
+    group: "104sets",
+  },
+  {
+    id: 4066,
+    name: "Velvet Gloves of Witch",
+    iconId: 486,
+    type: "equipment",
+    classification: "magicGloves",
+    group: "104sets",
+  },
+  {
+    id: 5066,
+    name: "Velvet Boots of Witch",
+    iconId: 642,
+    type: "equipment",
+    classification: "magicBoots",
+    group: "104sets",
+  },
+  {
+    id: 2067,
+    name: "Heaven's Bonnet",
+    iconId: 149,
+    type: "equipment",
+    classification: "magicHat",
+    group: "120sets",
+  },
+  {
+    id: 3067,
+    name: "Heaven's Coat",
+    iconId: 344,
+    type: "equipment",
+    classification: "magicClothes",
+    group: "120sets",
+  },
+  {
+    id: 4067,
+    name: "Heaven's Gloves",
+    iconId: 487,
+    type: "equipment",
+    classification: "magicGloves",
+    group: "120sets",
+  },
+  {
+    id: 5067,
+    name: "Heaven's Shoes",
+    iconId: 643,
+    type: "equipment",
+    classification: "magicBoots",
+    group: "120sets",
+  },
+];
+
+const WEAPONS: Item[] = [
+  {
+    id: 8045,
+    name: "Great Hammer",
+    iconId: 964,
+    type: "equipment",
+    classification: "blunts",
+    group: "weapons",
+  },
+  {
+    id: 8046,
+    name: "Forest Hammer",
+    iconId: 965,
+    type: "equipment",
+    classification: "blunts",
+    group: "weapons",
+  },
+  {
+    id: 8047,
+    name: "Labour Hammer",
+    iconId: 966,
+    type: "equipment",
+    classification: "blunts",
+    group: "weapons",
+  },
+  {
+    id: 8017,
+    name: "Flamboyant",
+    iconId: 927,
+    type: "equipment",
+    classification: "oneHandedSwords",
+    group: "weapons",
+  },
+  {
+    id: 8018,
+    name: "Righteous Sword",
+    iconId: 928,
+    type: "equipment",
+    classification: "oneHandedSwords",
+    group: "weapons",
+  },
+  {
+    id: 8144,
+    name: "Bloody Axe",
+    iconId: 1132,
+    type: "equipment",
+    classification: "axes",
+    group: "weapons",
+  },
+  {
+    id: 8145,
+    name: "Collapse Axe",
+    iconId: 1133,
+    type: "equipment",
+    classification: "axes",
+    group: "weapons",
+  },
+  {
+    id: 8443,
+    name: "Spirits Dual Wield",
+    iconId: 1430,
+    type: "equipment",
+    classification: "duals",
+    group: "weapons",
+  },
+  {
+    id: 8444,
+    name: "Desperado Dual Wield",
+    iconId: 1431,
+    type: "equipment",
+    classification: "duals",
+    group: "weapons",
+  },
+  {
+    id: 8415,
+    name: "Fenrir's Tooth",
+    iconId: 1393,
+    type: "equipment",
+    classification: "katars",
+    group: "weapons",
+  },
+  {
+    id: 8416,
+    name: "Phantasma Knuckle",
+    iconId: 1394,
+    type: "equipment",
+    classification: "katars",
+    group: "weapons",
+  },
+  {
+    id: 8176,
+    name: "Dagan Spear",
+    iconId: 1095,
+    type: "equipment",
+    classification: "spears",
+    group: "weapons",
+  },
+  {
+    id: 8177,
+    name: "Longinus Spear",
+    iconId: 1096,
+    type: "equipment",
+    classification: "spears",
+    group: "weapons",
+  },
+  {
+    id: 8115,
+    name: "Great Sword",
+    iconId: 1055,
+    type: "equipment",
+    classification: "twoHandedSwords",
+    group: "weapons",
+  },
+  {
+    id: 8116,
+    name: "Giant Sword",
+    iconId: 1056,
+    type: "equipment",
+    classification: "twoHandedSwords",
+    group: "weapons",
+  },
+  {
+    id: 8315,
+    name: "Cypress Pole",
+    iconId: 1302,
+    type: "equipment",
+    classification: "staffs",
+    group: "weapons",
+  },
+  {
+    id: 8316,
+    name: "Ikaness Staff",
+    iconId: 1303,
+    type: "equipment",
+    classification: "staffs",
+    group: "weapons",
+  },
+  {
+    id: 8345,
+    name: "Conjurer's Wand",
+    iconId: 1356,
+    type: "equipment",
+    classification: "wands",
+    group: "weapons",
+  },
+  {
+    id: 8346,
+    name: "Twister Wand",
+    iconId: 1357,
+    type: "equipment",
+    classification: "wands",
+    group: "weapons",
+  },
+  {
+    id: 8216,
+    name: "Mediator Bow",
+    iconId: 1186,
+    type: "equipment",
+    classification: "bows",
+    group: "weapons",
+  },
+  {
+    id: 8217,
+    name: "Lynx Bow",
+    iconId: 1187,
+    type: "equipment",
+    classification: "bows",
+    group: "weapons",
+  },
+  {
+    id: 8216,
+    name: "Steel Crossbow",
+    iconId: 997,
+    type: "equipment",
+    classification: "bows",
+    group: "weapons",
+  },
+  {
+    id: 8217,
+    name: "Mythril Crossbow",
+    iconId: 998,
+    type: "equipment",
+    classification: "bows",
+    group: "weapons",
+  },
+  {
+    id: 8244,
+    name: "Remington",
+    iconId: 1223,
+    type: "equipment",
+    classification: "guns",
+    group: "weapons",
+  },
+  {
+    id: 8245,
+    name: "Brave Gun",
+    iconId: 1224,
+    type: "equipment",
+    classification: "guns",
+    group: "weapons",
+  },
+  {
+    id: 8246,
+    name: "Bastard Gun",
+    iconId: 1225,
+    type: "equipment",
+    classification: "guns",
+    group: "weapons",
+  },
+  {
+    id: 8272,
+    name: "Particle Cannon",
+    iconId: 1259,
+    type: "equipment",
+    classification: "launchers",
+    group: "weapons",
+  },
+  {
+    id: 8273,
+    name: "Mana Cannon",
+    iconId: 1261,
+    type: "equipment",
+    classification: "launchers",
+    group: "weapons",
+  },
+  {
+    id: 8274,
+    name: "Ferrell Cannon",
+    iconId: 1262,
+    type: "equipment",
+    classification: "launchers",
+    group: "weapons",
+  },
+];
