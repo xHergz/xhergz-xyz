@@ -5,6 +5,7 @@ import Link from "next/link";
 import PageWrapper from "../../src/components/PageWrapper/PageWrapper";
 
 const PATHS = {
+  DROP_TABLE_MAKER: "/rose/drop-table-maker",
   ITEM_QUALITY: "/rose/item-quality",
   ITEM_STATS: "/rose/item-stats",
   MONSTER_COLOUR: "/rose/monster-colour",
@@ -28,6 +29,9 @@ const Rose: NextPage = () => {
           </li>
           <li>
             <Link href={PATHS.REFINE_DATA}>Refine Data</Link>
+          </li>
+          <li>
+            <Link href={PATHS.DROP_TABLE_MAKER}>Drop Table Maker</Link>
           </li>
         </ul>
       </div>
