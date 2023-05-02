@@ -1,6 +1,6 @@
-type RoseItemType = "equipment" | "consumable" | "etc";
+export type RoseItemType = "equipment" | "consumable" | "etc";
 
-type RoseItemClassification =
+export type RoseItemClassification =
   | "material"
   | "chemical"
   | "potion"
@@ -39,7 +39,7 @@ type RoseItemClassification =
   | "guns"
   | "launchers";
 
-type RoseItemGroup =
+export type RoseItemGroup =
   | "junonMaterials"
   | "lunaMaterials"
   | "eldeonMaterials"
@@ -1171,7 +1171,7 @@ const ARMOR: Item[] = [
     group: "104sets",
   },
   {
-    id: 4096,
+    id: 3096,
     name: "Jaguar Armor",
     iconId: 369,
     type: "equipment",
@@ -1179,7 +1179,7 @@ const ARMOR: Item[] = [
     group: "104sets",
   },
   {
-    id: 2096,
+    id: 4096,
     name: "Jaguar Gloves",
     iconId: 525,
     type: "equipment",
@@ -1187,7 +1187,7 @@ const ARMOR: Item[] = [
     group: "104sets",
   },
   {
-    id: 2096,
+    id: 5096,
     name: "Jaguar Boots",
     iconId: 681,
     type: "equipment",
@@ -1203,7 +1203,7 @@ const ARMOR: Item[] = [
     group: "120sets",
   },
   {
-    id: 2097,
+    id: 3097,
     name: "Wild Hawker Chest",
     iconId: 370,
     type: "equipment",
@@ -1219,7 +1219,7 @@ const ARMOR: Item[] = [
     group: "120sets",
   },
   {
-    id: 2097,
+    id: 5097,
     name: "Wild Hawker Boots",
     iconId: 682,
     type: "equipment",
@@ -1251,7 +1251,7 @@ const ARMOR: Item[] = [
     group: "104sets",
   },
   {
-    id: 4126,
+    id: 5126,
     name: "Rich Merchant Boots",
     iconId: 707,
     type: "equipment",
@@ -1653,4 +1653,21 @@ const WEAPONS: Item[] = [
     classification: "launchers",
     group: "weapons",
   },
+];
+
+export const ALL_ITEMS = [
+  ...CHEMICALS,
+  ...MAGIC_ITEMS,
+  ...MATERIALS,
+  ...CLOTHS,
+  ...LEATHERS,
+  ...METALS,
+  ...OTHERWORLDLY_METALS,
+  ...STONE_MATERIALS,
+  ...WOODEN_MATERIALS,
+  ...POTIONS,
+  ...REFINES,
+  ...GEMS,
+  ...ARMOR,
+  ...WEAPONS,
 ];

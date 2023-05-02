@@ -11,6 +11,7 @@
     "test": "echo \"No tests to run yet\" && exit 0"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.14",
     "clsx": "^1.2.1",
     "date-fns": "^2.29.3",
     "lodash": "^4.17.21",
