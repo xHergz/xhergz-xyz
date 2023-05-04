@@ -52,7 +52,7 @@ export type RoseItemGroup =
   | "120sets"
   | "weapons";
 
-type Item = {
+export type Item = {
   id: number;
   name: string;
   iconId: number;
