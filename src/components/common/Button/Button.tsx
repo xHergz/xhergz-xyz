@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { isNil } from "lodash";
 import { ButtonHTMLAttributes } from "react";
+import { twMerge } from "tailwind-merge";
 
 import { ThemeColor } from "../../../types/theme.types";
 import {
@@ -11,7 +12,7 @@ import {
 
 export type ButtonVariant = "contained" | "outlined" | "text" | "auxiliary";
 
-export type ButtonSize = "sm" | "lg";
+export type ButtonSize = "sm" | "md" | "lg";
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   color?: ThemeColor;
@@ -40,7 +41,7 @@ const Button: React.FC<ButtonProps> = (props): JSX.Element | null => {
   const textColor = getTextColor(color, variant === "contained");
 
   const buttonClasses = clsx({
-    ["font-semibold uppercase flex items-center gap-2.5 hover:bg-opacity-50"]:
+    ["font-semibold uppercase inline-flex items-center gap-2.5 hover:bg-opacity-50"]:
       true,
     [`border ${borderColor}`]:
       variant === "contained" || variant === "outlined",
@@ -52,11 +53,10 @@ const Button: React.FC<ButtonProps> = (props): JSX.Element | null => {
     ["text-xs"]: size === "sm",
     ["opacity-50 cursor-not-allowed"]: disabled,
     [textColor]: true,
-    [className || ""]: true,
   });
 
   return hidden ? null : (
-    <button {...props} className={buttonClasses}>
+    <button {...props} className={twMerge(buttonClasses, className)}>
       {leftIcon && leftIcon}
       {children}
       {rightIcon && rightIcon}

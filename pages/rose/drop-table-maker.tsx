@@ -1,4 +1,4 @@
-import { Listbox, Transition } from "@headlessui/react";
+import { Listbox, Tab, Transition } from "@headlessui/react";
 import {
   ArchiveBoxXMarkIcon,
   ArrowDownTrayIcon,
@@ -6,11 +6,12 @@ import {
   ChevronDownIcon,
   CursorArrowRaysIcon,
   FolderIcon,
+  PlusIcon,
 } from "@heroicons/react/24/solid";
 import clsx from "clsx";
 import { NextPage } from "next";
 import NextImage from "next/image";
-import { Fragment, useMemo, useRef, useState } from "react";
+import { Fragment, useState } from "react";
 
 import PageWrapper from "../../src/components/PageWrapper/PageWrapper";
 import {
@@ -20,6 +21,8 @@ import {
 } from "../../src/constants/drop.constants";
 import { customLoader } from "../../src/utils/next.utils";
 import FileInputButton from "../../src/components/common/FileInputButton";
+import IconButton from "../../src/components/common/IconButton";
+import Button from "../../src/components/common/Button";
 
 type ItemGroupOption = {
   id: RoseItemGroup;
@@ -213,9 +216,7 @@ const DropTable = ({
           ))}
         </tbody>
       </table>
-      <button className="bg-white-500 px-8" onClick={onNewRow}>
-        +
-      </button>
+      <IconButton Icon={PlusIcon} onClick={onNewRow} />
     </>
   );
 };
@@ -264,6 +265,13 @@ const DropTableMaker: NextPage = () => {
       drops: [...Array(35)].map((x) => null),
     });
     setDropRows(newRows);
+  };
+
+  const handleAddNewTab = () => {
+    const newRows = [...dropRows];
+    newRows.push([]);
+    setDropRows(newRows);
+    setCurrentTabIndex(newRows.length - 1);
   };
 
   const handleSelectedGroupChange = (newGroup: ItemGroupOption) => {
@@ -336,12 +344,36 @@ const DropTableMaker: NextPage = () => {
             );
           })}
         </div>
-        <DropTable
-          rows={dropRows[currentTabIndex]}
-          onAddMobImage={handleAddMobImage}
-          onCellClick={handleCellClick}
-          onNewRow={handleAddNewRow}
-        />
+        <Tab.Group
+          selectedIndex={currentTabIndex}
+          onChange={setCurrentTabIndex}
+        >
+          <Tab.List>
+            {dropRows.map((row, index) => (
+              <Tab
+                key={index}
+                className={
+                  currentTabIndex === index ? "bg-secondary-500 text-white" : ""
+                }
+              >
+                Tab {index + 1}
+              </Tab>
+            ))}
+            <IconButton Icon={PlusIcon} size="sm" onClick={handleAddNewTab} />
+          </Tab.List>
+          <Tab.Panels>
+            {dropRows.map((row, index) => (
+              <Tab.Panel key={index}>
+                <DropTable
+                  rows={dropRows[index]}
+                  onAddMobImage={handleAddMobImage}
+                  onCellClick={handleCellClick}
+                  onNewRow={handleAddNewRow}
+                />
+              </Tab.Panel>
+            ))}
+          </Tab.Panels>
+        </Tab.Group>
       </div>
     </PageWrapper>
   );
