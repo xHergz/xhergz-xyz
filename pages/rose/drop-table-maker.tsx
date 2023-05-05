@@ -239,6 +239,17 @@ const DropTableMaker: NextPage = () => {
     "shadow-[inset_0_-2px_4px_rgba(0,0,0,0.6)]": selectedTool === "remove",
   });
 
+  const handleCellClick = (rowIndex: number, columnIndex: number) => {
+    if (currentItem === null) {
+      return;
+    }
+    const newValue: DropTableColumn | null =
+      selectedTool === "add" ? { item: currentItem, dropType: null } : null;
+    const newRows = [...dropRows];
+    newRows[rowIndex].drops[columnIndex] = newValue;
+    setDropRows(newRows);
+  };
+
   const handleAddMobImage = (rowIndex: number, mobImage: string) => {
     const newRows = [...dropRows];
     newRows[rowIndex].mobImage = mobImage;
@@ -328,7 +339,7 @@ const DropTableMaker: NextPage = () => {
         <DropTable
           rows={dropRows}
           onAddMobImage={handleAddMobImage}
-          onCellClick={() => {}}
+          onCellClick={handleCellClick}
           onNewRow={handleAddNewRow}
         />
       </div>
