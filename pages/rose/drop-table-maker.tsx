@@ -2,6 +2,7 @@ import { Listbox, Transition } from "@headlessui/react";
 import {
   ArchiveBoxXMarkIcon,
   ArrowDownTrayIcon,
+  ArrowUpTrayIcon,
   ChevronDownIcon,
   CursorArrowRaysIcon,
   FolderIcon,
@@ -9,7 +10,7 @@ import {
 import clsx from "clsx";
 import { NextPage } from "next";
 import NextImage from "next/image";
-import { Fragment, useMemo, useState } from "react";
+import { Fragment, useMemo, useRef, useState } from "react";
 
 import PageWrapper from "../../src/components/PageWrapper/PageWrapper";
 import {
@@ -18,6 +19,7 @@ import {
   RoseItemGroup,
 } from "../../src/constants/drop.constants";
 import { customLoader } from "../../src/utils/next.utils";
+import FileInputButton from "../../src/components/common/FileInputButton";
 
 type ItemGroupOption = {
   id: RoseItemGroup;
@@ -112,8 +114,115 @@ const DropItem = ({ dropType, item, selected, onClick }: DropItemProps) => {
   );
 };
 
+type DropTableColumn = {
+  item: Item;
+  dropType: DropType | null;
+};
+
+type DropTableRow = {
+  mobImage: string;
+  drops: (DropTableColumn | null)[];
+};
+
+type DropTableProps = {
+  rows: DropTableRow[];
+  onAddMobImage: (index: number, mobImage: string) => void;
+  onNewRow: () => void;
+  onCellClick: (rowIndex: number, columnIndex: number) => void;
+};
+
+const DropTable = ({
+  rows,
+  onAddMobImage,
+  onNewRow,
+  onCellClick,
+}: DropTableProps) => {
+  const handleNewImage = (index: number, files: FileList) => {
+    // Get the selected file
+    const image = files[0];
+
+    if (image) {
+      // Create a new FileReader instance
+      const reader = new FileReader();
+
+      // Set the callback function for when the file is loaded
+      reader.onload = () => {
+        // Get the base 64 encoded string from the reader's result
+        const arrayBuffer = reader.result as ArrayBuffer;
+        const base64String = `data:${image.type};base64,${Buffer.from(
+          arrayBuffer
+        ).toString("base64")}`;
+        onAddMobImage(index, base64String);
+      };
+
+      // Read the file as an ArrayBuffer (which will trigger the onload callback)
+      reader.readAsArrayBuffer(image);
+    }
+  };
+
+  return (
+    <>
+      <table>
+        <thead>
+          <tr>
+            <th className="w-32 bg-gray-300"></th>
+            {[...Array(35)].map((x, i) => (
+              <th key={i} className="w-32 bg-gray-300 text-center">
+                #{i + 1}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, rowIndex) => (
+            <tr key={rowIndex}>
+              <td className="w-32 border-2 border-gray-200 text-center align-middle">
+                {row.mobImage ? (
+                  <NextImage
+                    src={`${row.mobImage}`}
+                    alt="mob"
+                    width={48}
+                    height={48}
+                    unoptimized
+                    loader={customLoader}
+                  />
+                ) : (
+                  <FileInputButton
+                    onFileSelected={(list) => handleNewImage(rowIndex, list)}
+                    rightIcon={<ArrowUpTrayIcon height={16} width={16} />}
+                  />
+                )}
+              </td>
+              {row.drops.map((drop, columnIndex) => (
+                <td
+                  key={columnIndex}
+                  className="w-32 text-center align-middle border-2 border-gray-200"
+                  onClick={() => onCellClick(rowIndex, columnIndex)}
+                >
+                  {drop && (
+                    <DropItem
+                      dropType={drop.dropType}
+                      item={drop.item}
+                      selected={false}
+                      onClick={() => {}}
+                    />
+                  )}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <button className="bg-white-500 px-8" onClick={onNewRow}>
+        +
+      </button>
+    </>
+  );
+};
+
 const DropTableMaker: NextPage = () => {
   const [currentItem, setCurrentItem] = useState<Item | null>(null);
+  const [dropRows, setDropRows] = useState<DropTableRow[]>([]);
   const [selectedGroup, setSelectedGroup] = useState<ItemGroupOption>(
     ROSE_ITEM_GROUPS[0]
   );
@@ -129,6 +238,22 @@ const DropTableMaker: NextPage = () => {
   const removeToolClasses = clsx({
     "shadow-[inset_0_-2px_4px_rgba(0,0,0,0.6)]": selectedTool === "remove",
   });
+
+  const handleAddMobImage = (rowIndex: number, mobImage: string) => {
+    const newRows = [...dropRows];
+    newRows[rowIndex].mobImage = mobImage;
+    setDropRows(newRows);
+  };
+
+  const handleAddNewRow = () => {
+    setDropRows((prevRows) => [
+      ...prevRows,
+      {
+        mobImage: "",
+        drops: [...Array(35)].map((x) => null),
+      },
+    ]);
+  };
 
   const handleSelectedGroupChange = (newGroup: ItemGroupOption) => {
     setSelectedGroup(newGroup);
@@ -200,6 +325,12 @@ const DropTableMaker: NextPage = () => {
             );
           })}
         </div>
+        <DropTable
+          rows={dropRows}
+          onAddMobImage={handleAddMobImage}
+          onCellClick={() => {}}
+          onNewRow={handleAddNewRow}
+        />
       </div>
     </PageWrapper>
   );
