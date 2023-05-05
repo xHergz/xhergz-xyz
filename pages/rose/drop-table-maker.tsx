@@ -222,7 +222,8 @@ const DropTable = ({
 
 const DropTableMaker: NextPage = () => {
   const [currentItem, setCurrentItem] = useState<Item | null>(null);
-  const [dropRows, setDropRows] = useState<DropTableRow[]>([]);
+  const [dropRows, setDropRows] = useState<DropTableRow[][]>([[]]);
+  const [currentTabIndex, setCurrentTabIndex] = useState<number>(0);
   const [selectedGroup, setSelectedGroup] = useState<ItemGroupOption>(
     ROSE_ITEM_GROUPS[0]
   );
@@ -246,24 +247,23 @@ const DropTableMaker: NextPage = () => {
     const newValue: DropTableColumn | null =
       selectedTool === "add" ? { item: currentItem, dropType: null } : null;
     const newRows = [...dropRows];
-    newRows[rowIndex].drops[columnIndex] = newValue;
+    newRows[currentTabIndex][rowIndex].drops[columnIndex] = newValue;
     setDropRows(newRows);
   };
 
   const handleAddMobImage = (rowIndex: number, mobImage: string) => {
     const newRows = [...dropRows];
-    newRows[rowIndex].mobImage = mobImage;
+    newRows[currentTabIndex][rowIndex].mobImage = mobImage;
     setDropRows(newRows);
   };
 
   const handleAddNewRow = () => {
-    setDropRows((prevRows) => [
-      ...prevRows,
-      {
-        mobImage: "",
-        drops: [...Array(35)].map((x) => null),
-      },
-    ]);
+    const newRows = [...dropRows];
+    newRows[currentTabIndex].push({
+      mobImage: "",
+      drops: [...Array(35)].map((x) => null),
+    });
+    setDropRows(newRows);
   };
 
   const handleSelectedGroupChange = (newGroup: ItemGroupOption) => {
@@ -337,7 +337,7 @@ const DropTableMaker: NextPage = () => {
           })}
         </div>
         <DropTable
-          rows={dropRows}
+          rows={dropRows[currentTabIndex]}
           onAddMobImage={handleAddMobImage}
           onCellClick={handleCellClick}
           onNewRow={handleAddNewRow}
