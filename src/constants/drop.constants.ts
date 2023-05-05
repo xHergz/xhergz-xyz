@@ -1671,3 +1671,7 @@ export const ALL_ITEMS = [
   ...ARMOR,
   ...WEAPONS,
 ];
+
+export const ALL_ITEM_MAP = new Map<number, Item>(
+  ALL_ITEMS.map((item) => [item.id, item])
+);
