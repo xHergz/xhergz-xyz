@@ -310,6 +310,34 @@ const DropTableMaker: NextPage = () => {
     setSelectedDropType(newType);
   };
 
+  const handleLoadFile = (files: FileList) => {
+    const saveFile = files[0];
+
+    if (saveFile) {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        setDropRows(JSON.parse(reader.result as string));
+      };
+
+      // Read the file as an ArrayBuffer (which will trigger the onload callback)
+      reader.readAsText(saveFile);
+    }
+  };
+
+  const handleSaveFile = () => {
+    const fileContent = JSON.stringify(dropRows);
+    const downloadLink = document.getElementById(
+      "downloadLink"
+    ) as HTMLAnchorElement;
+    if (downloadLink !== null) {
+      const fileData = new Blob([fileContent], { type: "application/json" });
+      downloadLink.href = URL.createObjectURL(fileData);
+      downloadLink.download = "DropFile.json";
+      downloadLink.click();
+    }
+  };
+
   const handleSelectedGroupChange = (newGroup: ItemGroupOption) => {
     setSelectedGroup(newGroup);
     setSelectedItems(ALL_ITEMS.filter((item) => item.group === newGroup.id));
@@ -329,8 +357,16 @@ const DropTableMaker: NextPage = () => {
       <div className="py-4 px-16">
         <div className="flex justify-between">
           <div className="flex gap-2">
-            <IconButton icon={FolderIcon} size="md" />
-            <IconButton icon={ArrowDownTrayIcon} size="md" />
+            <FileInputButton
+              rightIcon={<FolderIcon width={24} height={24} />}
+              size="md"
+              onFileSelected={handleLoadFile}
+            />
+            <IconButton
+              icon={ArrowDownTrayIcon}
+              size="md"
+              onClick={handleSaveFile}
+            />
             <IconButton
               className={addToolClasses}
               icon={CursorArrowRaysIcon}
@@ -427,6 +463,7 @@ const DropTableMaker: NextPage = () => {
             ))}
           </Tab.Panels>
         </Tab.Group>
+        <a id="downloadLink" style={{ display: "none" }} />
       </div>
     </PageWrapper>
   );
