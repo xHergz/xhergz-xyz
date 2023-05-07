@@ -3,15 +3,15 @@ import { twMerge } from "tailwind-merge";
 
 import Button, { ButtonProps } from "../Button";
 
-export type IconButtonProps = ButtonProps & {
-  Icon: React.ComponentType<{ className?: string }>;
+export type IconButtonProps = Omit<ButtonProps, "leftIcon" | "rightIcon"> & {
+  icon: React.ComponentType<{ className?: string }>;
 };
 
 const IconButton: React.FunctionComponent<IconButtonProps> = ({
   size = "md",
   ...props
 }: IconButtonProps): JSX.Element => {
-  const { children, className, Icon } = props;
+  const { className, icon: IconComponent } = props;
 
   const buttonClasses = clsx({
     "py-1 px-1": size === "sm",
@@ -27,7 +27,7 @@ const IconButton: React.FunctionComponent<IconButtonProps> = ({
 
   return (
     <Button className={twMerge(buttonClasses, className)} {...props}>
-      <Icon className={iconClasses} />
+      <IconComponent className={iconClasses} />
     </Button>
   );
 };
