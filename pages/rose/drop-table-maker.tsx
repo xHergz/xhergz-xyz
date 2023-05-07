@@ -22,7 +22,7 @@ import {
 import { customLoader } from "../../src/utils/next.utils";
 import FileInputButton from "../../src/components/common/FileInputButton";
 import IconButton from "../../src/components/common/IconButton";
-import Button from "../../src/components/common/Button";
+import Button, { ButtonProps } from "../../src/components/common/Button";
 
 type ItemGroupOption = {
   id: RoseItemGroup;
@@ -91,10 +91,10 @@ const DropItem = ({ dropType, item, selected, onClick }: DropItemProps) => {
   const iconUrl = `https://www.aruarose.com/public/images/armory/icons/icon_${item.iconId}.png`;
 
   const itemClasses = clsx({
-    "cursor-pointer": true,
-    "border-2 border-yellow-500": dropType === "normal",
-    "border-2 border-blue-500": dropType === "rare",
-    "border-2 border-purple-500": dropType === "unique",
+    "cursor-pointer w-auto m-0": true,
+    "border-4 border-yellow-300": dropType === "normal",
+    "border-4 border-blue-300": dropType === "rare",
+    "border-4 border-purple-300": dropType === "unique",
     "border-2 border-green-500": selected,
   });
 
@@ -216,15 +216,41 @@ const DropTable = ({
           ))}
         </tbody>
       </table>
-      <IconButton Icon={PlusIcon} onClick={onNewRow} />
+      <IconButton icon={PlusIcon} onClick={onNewRow} />
     </>
   );
+};
+
+type DropTypeButtonProps = {
+  dropType: DropType;
+  selected: boolean;
+  onClick: (newType: DropType) => void;
+};
+
+const DropTypeButton = ({
+  dropType,
+  selected,
+  onClick,
+}: DropTypeButtonProps) => {
+  const buttonClasses = clsx({
+    "bg-yellow-300": dropType === "normal",
+    "bg-blue-300": dropType === "rare",
+    "bg-purple-300": dropType === "unique",
+    "shadow-[inset_0_-2px_4px_rgba(0,0,0,0.6)]": selected,
+  });
+
+  const handleClick = (): void => {
+    onClick(dropType);
+  };
+
+  return <Button className={buttonClasses} size="md" onClick={handleClick} />;
 };
 
 const DropTableMaker: NextPage = () => {
   const [currentItem, setCurrentItem] = useState<Item | null>(null);
   const [dropRows, setDropRows] = useState<DropTableRow[][]>([[]]);
   const [currentTabIndex, setCurrentTabIndex] = useState<number>(0);
+  const [selectedDropType, setSelectedDropType] = useState<DropType>("normal");
   const [selectedGroup, setSelectedGroup] = useState<ItemGroupOption>(
     ROSE_ITEM_GROUPS[0]
   );
@@ -246,7 +272,13 @@ const DropTableMaker: NextPage = () => {
       return;
     }
     const newValue: DropTableColumn | null =
-      selectedTool === "add" ? { item: currentItem, dropType: null } : null;
+      selectedTool === "add"
+        ? {
+            item: currentItem,
+            dropType:
+              currentItem.type === "equipment" ? selectedDropType : null,
+          }
+        : null;
     const newRows = [...dropRows];
     newRows[currentTabIndex][rowIndex].drops[columnIndex] = newValue;
     setDropRows(newRows);
@@ -274,6 +306,10 @@ const DropTableMaker: NextPage = () => {
     setCurrentTabIndex(newRows.length - 1);
   };
 
+  const handleDropTypeChange = (newType: DropType): void => {
+    setSelectedDropType(newType);
+  };
+
   const handleSelectedGroupChange = (newGroup: ItemGroupOption) => {
     setSelectedGroup(newGroup);
     setSelectedItems(ALL_ITEMS.filter((item) => item.group === newGroup.id));
@@ -293,18 +329,35 @@ const DropTableMaker: NextPage = () => {
       <div className="py-4 px-16">
         <div className="flex justify-between">
           <div className="flex gap-2">
-            <button>
-              <FolderIcon height={32} width={32} />
-            </button>
-            <button>
-              <ArrowDownTrayIcon height={32} width={32} />
-            </button>
-            <button className={addToolClasses} onClick={selectAddTool}>
-              <CursorArrowRaysIcon height={32} width={32} />
-            </button>
-            <button className={removeToolClasses} onClick={selectRemoveTool}>
-              <ArchiveBoxXMarkIcon height={32} width={32} />
-            </button>
+            <IconButton icon={FolderIcon} size="md" />
+            <IconButton icon={ArrowDownTrayIcon} size="md" />
+            <IconButton
+              className={addToolClasses}
+              icon={CursorArrowRaysIcon}
+              size="md"
+              onClick={selectAddTool}
+            />
+            <IconButton
+              className={removeToolClasses}
+              icon={ArchiveBoxXMarkIcon}
+              size="md"
+              onClick={selectRemoveTool}
+            />
+            <DropTypeButton
+              dropType="normal"
+              selected={selectedDropType === "normal"}
+              onClick={handleDropTypeChange}
+            />
+            <DropTypeButton
+              dropType="rare"
+              selected={selectedDropType === "rare"}
+              onClick={handleDropTypeChange}
+            />
+            <DropTypeButton
+              dropType="unique"
+              selected={selectedDropType === "unique"}
+              onClick={handleDropTypeChange}
+            />
           </div>
           <div className="relative">
             <Listbox value={selectedGroup} onChange={handleSelectedGroupChange}>
@@ -359,7 +412,7 @@ const DropTableMaker: NextPage = () => {
                 Tab {index + 1}
               </Tab>
             ))}
-            <IconButton Icon={PlusIcon} size="sm" onClick={handleAddNewTab} />
+            <IconButton icon={PlusIcon} size="sm" onClick={handleAddNewTab} />
           </Tab.List>
           <Tab.Panels>
             {dropRows.map((row, index) => (
