@@ -761,7 +761,7 @@ const WOODEN_MATERIALS: Item[] = [
   {
     id: 12034,
     name: "Oak Wood",
-    iconId: 17797,
+    iconId: 1797,
     type: "etc",
     classification: "woodenMaterial",
     group: "resources",
@@ -1539,6 +1539,14 @@ const WEAPONS: Item[] = [
     iconId: 1056,
     type: "equipment",
     classification: "twoHandedSwords",
+    group: "weapons",
+  },
+  {
+    id: 8314,
+    name: "Prayer Staff",
+    iconId: 1301,
+    type: "equipment",
+    classification: "staffs",
     group: "weapons",
   },
   {
