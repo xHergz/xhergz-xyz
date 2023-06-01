@@ -167,7 +167,10 @@ const StbViewer: React.FunctionComponent<StbViewerProps> = (
       <p>Col Count: {stbInfo?.colCount}</p>
       <table style={{ border: "1px black solid" }}>
         <thead>
-          <tr>
+          <tr style={{ position: "sticky", top: 0, background: "white" }}>
+            <th key="Row#" style={{ border: "1px black solid" }}>
+              Row #
+            </th>
             {headers.map((header) => (
               <th key={header} style={{ border: "1px black solid" }}>
                 {header}
@@ -178,6 +181,9 @@ const StbViewer: React.FunctionComponent<StbViewerProps> = (
         <tbody>
           {rowData.map((row, rowIndex) => (
             <tr key={rowIndex}>
+              <td key={`-1-${rowIndex}`} style={{ border: "1px black solid" }}>
+                {rowIndex}
+              </td>
               {row.map((column, colIndex) => (
                 <td
                   key={`${headers[colIndex]}-${rowIndex}`}
