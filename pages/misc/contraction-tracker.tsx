@@ -154,7 +154,7 @@ function ContractionTracker(): JSX.Element {
   );
 
   return (
-    <PageWrapper hideLogos>
+    <PageWrapper>
       <div className={styles.container}>
         <div className={hospitalStatusClasses}>
           Hospital Time: <strong>{hospitalTimeLabel}</strong>
