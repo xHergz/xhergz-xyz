@@ -36,7 +36,7 @@ const PageWrapper: React.FunctionComponent<PageWrapperProps> = ({
   };
 
   return (
-    <div className="flex flex-col h-screen w-full">
+    <div className="flex flex-col h-screen max-h-screen w-full">
       <nav className="flex items-center h-16 w-100 px-2 py-2 border-b">
         <Link className="mb-2" href={PATHS.HOME}>
           <Image
@@ -64,8 +64,8 @@ const PageWrapper: React.FunctionComponent<PageWrapperProps> = ({
           Support
         </Link>
       </nav>
-      <div className="flex flex-1">
-        <nav className="flex flex-col h-100 w-16 border-r">
+      <div className="flex flex-1 max-h-[calc(100vh_-_64px)]">
+        <nav className="flex flex-col h-full w-16 border-r">
           <Link className="px-2 hover:bg-gray-100" href={PATHS.ROSE}>
             <StarIcon
               className="rotate-[12deg] my-2"
@@ -125,7 +125,7 @@ const PageWrapper: React.FunctionComponent<PageWrapperProps> = ({
             </span>
           </div>
         </nav>
-        <main className="w-full">{children}</main>
+        <main className="w-full h-full">{children}</main>
       </div>
     </div>
   );

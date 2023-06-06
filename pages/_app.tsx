@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <SupabaseProvider>
       <AuthProvider>
-        <Component {...pageProps} />;
+        <Component {...pageProps} />
       </AuthProvider>
     </SupabaseProvider>
   );
