@@ -20,8 +20,8 @@ import SegmentedControl, {
 import StatFilter from "../../src/components/StatFilter/StatFilter";
 
 import styles from "../../styles/ItemStats.module.scss";
-import PageWrapper from "../../src/components/PageWrapper/PageWrapper";
 import clsx from "clsx";
+import RosePageWrapper from "../../src/components/PageWrapper/RosePageWrapper";
 
 type StatMode = "craft" | "drop";
 
@@ -82,7 +82,7 @@ const ItemStats = (): JSX.Element => {
     [goodStatsOnly, statFilters, reversed]
   );
   return (
-    <PageWrapper>
+    <RosePageWrapper>
       <div className={styles.itemStatsContainer}>
         <SegmentedControl<StatMode>
           className={styles.divider}
@@ -156,7 +156,7 @@ const ItemStats = (): JSX.Element => {
           })}
         </div>
       </div>
-    </PageWrapper>
+    </RosePageWrapper>
   );
 };
 

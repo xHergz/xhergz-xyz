@@ -13,7 +13,6 @@ import { NextPage } from "next";
 import NextImage from "next/image";
 import { Fragment, useState } from "react";
 
-import PageWrapper from "../../src/components/PageWrapper/PageWrapper";
 import {
   ALL_ITEMS,
   Item,
@@ -22,7 +21,8 @@ import {
 import { customLoader } from "../../src/utils/next.utils";
 import FileInputButton from "../../src/components/common/FileInputButton";
 import IconButton from "../../src/components/common/IconButton";
-import Button, { ButtonProps } from "../../src/components/common/Button";
+import Button from "../../src/components/common/Button";
+import RosePageWrapper from "../../src/components/PageWrapper/RosePageWrapper";
 
 type ItemGroupOption = {
   id: RoseItemGroup;
@@ -353,119 +353,114 @@ const DropTableMaker: NextPage = () => {
   };
 
   return (
-    <PageWrapper>
-      <div className="py-4 px-16">
-        <div className="flex justify-between">
-          <div className="flex gap-2">
-            <FileInputButton
-              rightIcon={<FolderIcon width={24} height={24} />}
-              size="md"
-              onFileSelected={handleLoadFile}
-            />
-            <IconButton
-              icon={ArrowDownTrayIcon}
-              size="md"
-              onClick={handleSaveFile}
-            />
-            <IconButton
-              className={addToolClasses}
-              icon={CursorArrowRaysIcon}
-              size="md"
-              onClick={selectAddTool}
-            />
-            <IconButton
-              className={removeToolClasses}
-              icon={ArchiveBoxXMarkIcon}
-              size="md"
-              onClick={selectRemoveTool}
-            />
-            <DropTypeButton
-              dropType="normal"
-              selected={selectedDropType === "normal"}
-              onClick={handleDropTypeChange}
-            />
-            <DropTypeButton
-              dropType="rare"
-              selected={selectedDropType === "rare"}
-              onClick={handleDropTypeChange}
-            />
-            <DropTypeButton
-              dropType="unique"
-              selected={selectedDropType === "unique"}
-              onClick={handleDropTypeChange}
-            />
-          </div>
-          <div className="relative">
-            <Listbox value={selectedGroup} onChange={handleSelectedGroupChange}>
-              <Listbox.Button className="flex items-center px-8">
-                {selectedGroup.label} <ChevronDownIcon height={16} width={16} />
-              </Listbox.Button>
-              <Transition
-                as={Fragment}
-                enter="transition ease-in duration-100"
-                enterFrom="opacity-0"
-                enterTo="opacity-100"
-                leave="transition ease-in duration-1 00"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
-              >
-                <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                  {ROSE_ITEM_GROUPS.map((group) => (
-                    <Listbox.Option key={group.id} value={group}>
-                      {group.label}
-                    </Listbox.Option>
-                  ))}
-                </Listbox.Options>
-              </Transition>
-            </Listbox>
-          </div>
+    <RosePageWrapper>
+      <div className="flex justify-between">
+        <div className="flex gap-2">
+          <FileInputButton
+            rightIcon={<FolderIcon width={24} height={24} />}
+            size="md"
+            onFileSelected={handleLoadFile}
+          />
+          <IconButton
+            icon={ArrowDownTrayIcon}
+            size="md"
+            onClick={handleSaveFile}
+          />
+          <IconButton
+            className={addToolClasses}
+            icon={CursorArrowRaysIcon}
+            size="md"
+            onClick={selectAddTool}
+          />
+          <IconButton
+            className={removeToolClasses}
+            icon={ArchiveBoxXMarkIcon}
+            size="md"
+            onClick={selectRemoveTool}
+          />
+          <DropTypeButton
+            dropType="normal"
+            selected={selectedDropType === "normal"}
+            onClick={handleDropTypeChange}
+          />
+          <DropTypeButton
+            dropType="rare"
+            selected={selectedDropType === "rare"}
+            onClick={handleDropTypeChange}
+          />
+          <DropTypeButton
+            dropType="unique"
+            selected={selectedDropType === "unique"}
+            onClick={handleDropTypeChange}
+          />
         </div>
-        <div className="flex gap-2 p-8 justify-center flex-wrap">
-          {selectedItems.map((item) => {
-            return (
-              <DropItem
-                key={item.id}
-                dropType={null}
-                item={item}
-                selected={currentItem !== null && currentItem.id === item.id}
-                onClick={setCurrentItem}
-              />
-            );
-          })}
+        <div className="relative">
+          <Listbox value={selectedGroup} onChange={handleSelectedGroupChange}>
+            <Listbox.Button className="flex items-center px-8">
+              {selectedGroup.label} <ChevronDownIcon height={16} width={16} />
+            </Listbox.Button>
+            <Transition
+              as={Fragment}
+              enter="transition ease-in duration-100"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="transition ease-in duration-1 00"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                {ROSE_ITEM_GROUPS.map((group) => (
+                  <Listbox.Option key={group.id} value={group}>
+                    {group.label}
+                  </Listbox.Option>
+                ))}
+              </Listbox.Options>
+            </Transition>
+          </Listbox>
         </div>
-        <Tab.Group
-          selectedIndex={currentTabIndex}
-          onChange={setCurrentTabIndex}
-        >
-          <Tab.List>
-            {dropRows.map((row, index) => (
-              <Tab
-                key={index}
-                className={
-                  currentTabIndex === index ? "bg-secondary-500 text-white" : ""
-                }
-              >
-                Tab {index + 1}
-              </Tab>
-            ))}
-            <IconButton icon={PlusIcon} size="sm" onClick={handleAddNewTab} />
-          </Tab.List>
-          <Tab.Panels>
-            {dropRows.map((row, index) => (
-              <Tab.Panel key={index}>
-                <DropTable
-                  rows={dropRows[index]}
-                  onAddMobImage={handleAddMobImage}
-                  onCellClick={handleCellClick}
-                  onNewRow={handleAddNewRow}
-                />
-              </Tab.Panel>
-            ))}
-          </Tab.Panels>
-        </Tab.Group>
-        <a id="downloadLink" style={{ display: "none" }} />
       </div>
-    </PageWrapper>
+      <div className="flex gap-2 p-8 justify-center flex-wrap">
+        {selectedItems.map((item) => {
+          return (
+            <DropItem
+              key={item.id}
+              dropType={null}
+              item={item}
+              selected={currentItem !== null && currentItem.id === item.id}
+              onClick={setCurrentItem}
+            />
+          );
+        })}
+      </div>
+      <Tab.Group selectedIndex={currentTabIndex} onChange={setCurrentTabIndex}>
+        <Tab.List>
+          {dropRows.map((row, index) => (
+            <Tab
+              key={index}
+              className={
+                currentTabIndex === index ? "bg-secondary-500 text-white" : ""
+              }
+            >
+              Tab {index + 1}
+            </Tab>
+          ))}
+          <IconButton icon={PlusIcon} size="sm" onClick={handleAddNewTab} />
+        </Tab.List>
+        <Tab.Panels>
+          {dropRows.map((row, index) => (
+            <Tab.Panel key={index}>
+              <DropTable
+                rows={dropRows[index]}
+                onAddMobImage={handleAddMobImage}
+                onCellClick={handleCellClick}
+                onNewRow={handleAddNewRow}
+              />
+            </Tab.Panel>
+          ))}
+        </Tab.Panels>
+      </Tab.Group>
+      <a id="downloadLink" style={{ display: "none" }} />
+    </RosePageWrapper>
   );
 };
 

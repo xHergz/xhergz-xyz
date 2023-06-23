@@ -7,7 +7,7 @@ import PageWrapper from "../src/components/PageWrapper/PageWrapper";
 const Home: NextPage = () => {
   return (
     <PageWrapper>
-      <div>
+      <div className="p-4">
         <ImageTile
           imageSource={CaptainMoldie.src}
           title="ROSE Tools"

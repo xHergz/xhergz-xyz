@@ -41,7 +41,7 @@ const Button: React.FC<ButtonProps> = (props): JSX.Element | null => {
   const textColor = getTextColor(color, variant === "contained");
 
   const buttonClasses = clsx({
-    ["font-semibold uppercase inline-flex items-center gap-2.5 hover:bg-opacity-50"]:
+    ["font-semibold uppercase flex items-center gap-2.5 hover:bg-opacity-50"]:
       true,
     [`border ${borderColor}`]:
       variant === "contained" || variant === "outlined",
