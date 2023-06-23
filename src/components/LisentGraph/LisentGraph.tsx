@@ -30,7 +30,7 @@ const LisentGraph: React.FunctionComponent<LisentGraphProps> = (
       <h6>{props.lisent.NAME}</h6>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
-          width={500}
+          width={200}
           height={300}
           data={data}
           margin={{

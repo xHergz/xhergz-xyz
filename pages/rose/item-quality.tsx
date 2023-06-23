@@ -1,7 +1,7 @@
 import { isNil } from "lodash";
 import React, { useState } from "react";
 import NumberInput from "../../src/components/NumberInput/NumberInput";
-import PageWrapper from "../../src/components/PageWrapper/PageWrapper";
+import RosePageWrapper from "../../src/components/PageWrapper/RosePageWrapper";
 
 export type ItemQualityProps = {};
 
@@ -19,7 +19,7 @@ const ItemQuality: React.FunctionComponent<ItemQualityProps> = (
   };
 
   return (
-    <PageWrapper>
+    <RosePageWrapper>
       <h3>Method #6</h3>
       <NumberInput label="Hit Rate:" value={hitRate} onChange={setHitRate} />
       <NumberInput
@@ -30,7 +30,7 @@ const ItemQuality: React.FunctionComponent<ItemQualityProps> = (
       {!isNil(hitRate) && !isNil(durability) ? (
         <div>Quality = {calculateMethodSix()}</div>
       ) : null}
-    </PageWrapper>
+    </RosePageWrapper>
   );
 };
 

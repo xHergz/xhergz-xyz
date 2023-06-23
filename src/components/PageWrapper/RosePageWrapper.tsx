@@ -10,7 +10,7 @@ const RosePageWrapper: React.FunctionComponent<RosePageWrapperProps> = ({
     <PageWrapper>
       <div className="flex h-full w-full">
         <RoseNavList />
-        <div className="w-full overflow-y-auto p-4">{children}</div>
+        <div className="flex-1 overflow-y-auto p-4">{children}</div>
       </div>
     </PageWrapper>
   );

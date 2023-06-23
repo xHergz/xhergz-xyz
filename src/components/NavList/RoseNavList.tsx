@@ -38,10 +38,6 @@ const ROSE_SECTIONS = [
         title: "Monster Colour Calculator",
         href: ROSE_PATHS.MONSTER_COLOUR,
       },
-      {
-        title: "Party EXP Calculator",
-        href: ROSE_PATHS.PARTY_EXP,
-      },
     ],
   },
   {

@@ -6,7 +6,7 @@ import { isNil, upperFirst } from "lodash";
 import NumberInput from "../../src/components/NumberInput/NumberInput";
 
 import styles from "../../styles/MonsterColour.module.scss";
-import PageWrapper from "../../src/components/PageWrapper/PageWrapper";
+import RosePageWrapper from "../../src/components/PageWrapper/RosePageWrapper";
 
 type MonsterNameColour =
   | "purple"
@@ -144,7 +144,7 @@ const MonsterColour = (): JSX.Element => {
     [styles[currentTierClass]]: true,
   });
   return (
-    <PageWrapper>
+    <RosePageWrapper>
       <div className={styles.monsterColourContainer}>
         <NumberInput
           className={styles.divider}
@@ -192,7 +192,7 @@ const MonsterColour = (): JSX.Element => {
           )}
         </div>
       </div>
-    </PageWrapper>
+    </RosePageWrapper>
   );
 };
 

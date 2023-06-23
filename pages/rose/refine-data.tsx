@@ -2,7 +2,6 @@ import React from "react";
 
 import GradeGraph from "../../src/components/GradeGraph/GradeGraph";
 import LisentGraph from "../../src/components/LisentGraph/LisentGraph";
-import PageWrapper from "../../src/components/PageWrapper/PageWrapper";
 import {
   LISENT_AG,
   LISENT_AL,
@@ -15,6 +14,7 @@ import {
   LISENT_PB,
   LISENT_RA,
 } from "../../src/constants/refine-data.constants";
+import RosePageWrapper from "../../src/components/PageWrapper/RosePageWrapper";
 
 export type RefineDataProps = {};
 
@@ -22,7 +22,7 @@ const RefineData: React.FunctionComponent<RefineDataProps> = (
   props: RefineDataProps
 ): JSX.Element => {
   return (
-    <PageWrapper>
+    <RosePageWrapper>
       <h3>Durability by Lisent</h3>
       <LisentGraph lisent={LISENT_FE} />
       <LisentGraph lisent={LISENT_CU} />
@@ -44,7 +44,7 @@ const RefineData: React.FunctionComponent<RefineDataProps> = (
       <GradeGraph grade={7} />
       <GradeGraph grade={8} />
       <GradeGraph grade={9} />
-    </PageWrapper>
+    </RosePageWrapper>
   );
 };
 
