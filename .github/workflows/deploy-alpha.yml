@@ -16,6 +16,13 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      # Create the env file
+      - name: Creating the env file
+        run: |
+          touch .env
+          echo NEXT_PUBLIC_SUPABASE_URL=${{ secrets.SUPABASE_URL }} >> .env
+          echo NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }} >> .env
+
       # Builds the app
       - name: Building the app
         run: cd $GITHUB_WORKSPACE && npm i --force && npm run export

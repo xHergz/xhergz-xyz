@@ -33,7 +33,7 @@ export const useUser = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [supabase.auth]);
 
   supabase.auth.onAuthStateChange((event, session) => {
     if (event === "SIGNED_IN") {

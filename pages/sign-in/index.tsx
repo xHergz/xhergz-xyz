@@ -45,7 +45,7 @@ const SignIn: NextPage = () => {
         </form>
         <Button onClick={signIn}>Sign In</Button>
         <span className="text-md">
-          Don't have an account?{" "}
+          {"Don't have an account? "}
           <Link className="underline" href={PATHS.SIGN_UP}>
             Sign Up
           </Link>
