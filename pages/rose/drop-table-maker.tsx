@@ -78,6 +78,7 @@ const ROSE_ITEM_GROUPS: ItemGroupOption[] = [
     id: "weapons",
     label: "Weapons",
   },
+  { id: "altEquipment", label: "Alt Equipment" },
 ];
 
 type DropItemProps = {
