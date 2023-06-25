@@ -25,6 +25,8 @@ export type RoseItemClassification =
   | "shoes"
   | "boots"
   | "magicBoots"
+  | "masks"
+  | "wings"
   | "blunts"
   | "oneHandedSwords"
   | "axes"
@@ -50,7 +52,8 @@ export type RoseItemGroup =
   | "gems"
   | "104sets"
   | "120sets"
-  | "weapons";
+  | "weapons"
+  | "altEquipment";
 
 export type Item = {
   id: number;
@@ -1170,6 +1173,22 @@ const WOODEN_MATERIALS: Item[] = [
 
 const POTIONS: Item[] = [
   {
+    id: 10010,
+    name: "Vital Water (S)",
+    iconId: 5246,
+    type: "consumable",
+    classification: "potion",
+    group: "consumables",
+  },
+  {
+    id: 10029,
+    name: "Spiritual Water (S)",
+    iconId: 5259,
+    type: "consumable",
+    classification: "potion",
+    group: "consumables",
+  },
+  {
     id: 10056,
     name: "Vital Jam (+1)",
     iconId: 5265,
@@ -2028,6 +2047,25 @@ const WEAPONS: Item[] = [
     type: "equipment",
     classification: "launchers",
     group: "weapons",
+  },
+];
+
+const ALT_EQUIPMENT: Item[] = [
+  {
+    id: 1195,
+    name: "Eagle Beak",
+    iconId: 13,
+    type: "equipment",
+    classification: "masks",
+    group: "altEquipment",
+  },
+  {
+    id: 6050,
+    name: "Hook Wings",
+    iconId: 5360,
+    type: "equipment",
+    classification: "wings",
+    group: "altEquipment",
   },
 ];
 
