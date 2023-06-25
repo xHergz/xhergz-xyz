@@ -2084,6 +2084,7 @@ export const ALL_ITEMS = [
   ...GEMS,
   ...ARMOR,
   ...WEAPONS,
+  ...ALT_EQUIPMENT,
 ];
 
 export const ALL_ITEM_MAP = new Map<number, Item>(
