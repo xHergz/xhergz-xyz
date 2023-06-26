@@ -50,6 +50,7 @@ export type RoseItemGroup =
   | "otherMaterials"
   | "resources"
   | "gems"
+  | "88sets"
   | "104sets"
   | "120sets"
   | "weapons"
@@ -1534,6 +1535,38 @@ const GEMS: Item[] = [
 
 const ARMOR: Item[] = [
   {
+    id: 2095,
+    name: "Mariner's Hat",
+    iconId: 186,
+    type: "equipment",
+    classification: "hat",
+    group: "88sets",
+  },
+  {
+    id: 3095,
+    name: "Mariner's Look",
+    iconId: 368,
+    type: "equipment",
+    classification: "combatUniforms",
+    group: "88sets",
+  },
+  {
+    id: 4095,
+    name: "Mariner's Gloves",
+    iconId: 524,
+    type: "equipment",
+    classification: "gloves",
+    group: "88sets",
+  },
+  {
+    id: 5095,
+    name: "Mariner's Boots",
+    iconId: 680,
+    type: "equipment",
+    classification: "boots",
+    group: "88sets",
+  },
+  {
     id: 2096,
     name: "Jaguar Hat",
     iconId: 187,
@@ -1596,6 +1629,38 @@ const ARMOR: Item[] = [
     type: "equipment",
     classification: "hat",
     group: "120sets",
+  },
+  {
+    id: 2125,
+    name: "Merchant Hat",
+    iconId: 212,
+    type: "equipment",
+    classification: "hat",
+    group: "88sets",
+  },
+  {
+    id: 3125,
+    name: "Merchant Vest",
+    iconId: 394,
+    type: "equipment",
+    classification: "casualClothes",
+    group: "88sets",
+  },
+  {
+    id: 4125,
+    name: "Merchant Gloves",
+    iconId: 550,
+    type: "equipment",
+    classification: "gloves",
+    group: "88sets",
+  },
+  {
+    id: 5125,
+    name: "Merchant Boots",
+    iconId: 706,
+    type: "equipment",
+    classification: "shoes",
+    group: "88sets",
   },
   {
     id: 2126,
@@ -1662,6 +1727,38 @@ const ARMOR: Item[] = [
     group: "120sets",
   },
   {
+    id: 2035,
+    name: "Mighty Helm",
+    iconId: 121,
+    type: "equipment",
+    classification: "helmet",
+    group: "88sets",
+  },
+  {
+    id: 3035,
+    name: "Mighty Armor",
+    iconId: 303,
+    type: "equipment",
+    classification: "combatUniforms",
+    group: "88sets",
+  },
+  {
+    id: 4035,
+    name: "Mighty Gauntlets",
+    iconId: 459,
+    type: "equipment",
+    classification: "gauntlets",
+    group: "88sets",
+  },
+  {
+    id: 5035,
+    name: "Mighty Boots",
+    iconId: 615,
+    type: "equipment",
+    classification: "boots",
+    group: "88sets",
+  },
+  {
     id: 2036,
     name: "Kurash Helm",
     iconId: 122,
@@ -1724,6 +1821,38 @@ const ARMOR: Item[] = [
     type: "equipment",
     classification: "boots",
     group: "120sets",
+  },
+  {
+    id: 2065,
+    name: "Hat of Shadow",
+    iconId: 147,
+    type: "equipment",
+    classification: "magicHat",
+    group: "88sets",
+  },
+  {
+    id: 3065,
+    name: "Coat of Shadow",
+    iconId: 342,
+    type: "equipment",
+    classification: "magicClothes",
+    group: "88sets",
+  },
+  {
+    id: 4065,
+    name: "Gloves of Shadow",
+    iconId: 485,
+    type: "equipment",
+    classification: "magicGloves",
+    group: "88sets",
+  },
+  {
+    id: 5065,
+    name: "Boots of Shadow",
+    iconId: 641,
+    type: "equipment",
+    classification: "magicBoots",
+    group: "88sets",
   },
   {
     id: 2066,
