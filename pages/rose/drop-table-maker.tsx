@@ -35,6 +35,10 @@ type DropType = "normal" | "rare" | "unique";
 
 const ROSE_ITEM_GROUPS: ItemGroupOption[] = [
   {
+    id: "88sets",
+    label: "88 Sets",
+  },
+  {
     id: "104sets",
     label: "104 Sets",
   },
@@ -79,6 +83,7 @@ const ROSE_ITEM_GROUPS: ItemGroupOption[] = [
     label: "Weapons",
   },
   { id: "altEquipment", label: "Alt Equipment" },
+  { id: "uniques", label: "Uniques" },
 ];
 
 type DropItemProps = {
