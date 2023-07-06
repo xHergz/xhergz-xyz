@@ -146,7 +146,7 @@ const DropTable = ({
   onNewRow,
   onCellClick,
 }: DropTableProps) => {
-  const handleNewImage = (index: number, files: FileList) => {
+  const handleNewImage = (index: number, files: FileList): void => {
     // Get the selected file
     const image = files[0];
 
@@ -174,52 +174,56 @@ const DropTable = ({
       <table>
         <thead>
           <tr>
-            <th className="w-32 bg-gray-300"></th>
-            {[...Array(35)].map((x, i) => (
-              <th key={i} className="w-32 bg-gray-300 text-center">
-                #{i + 1}
-              </th>
-            ))}
+            <th className="w-32 bg-gray-300" />
+            {rows.map((row, rowIndex) => {
+              return (
+                <th className="w-32 bg-gray-300" key={rowIndex}>
+                  {row.mobImage ? (
+                    <NextImage
+                      src={`${row.mobImage}`}
+                      alt="mob"
+                      width={48}
+                      height={48}
+                      unoptimized
+                      loader={customLoader}
+                    />
+                  ) : (
+                    <FileInputButton
+                      onFileSelected={(list) => handleNewImage(rowIndex, list)}
+                      rightIcon={<ArrowUpTrayIcon height={16} width={16} />}
+                    />
+                  )}
+                </th>
+              );
+            })}
           </tr>
         </thead>
         <tbody>
-          {rows.map((row, rowIndex) => (
-            <tr key={rowIndex}>
-              <td className="w-32 border-2 border-gray-200 text-center align-middle">
-                {row.mobImage ? (
-                  <NextImage
-                    src={`${row.mobImage}`}
-                    alt="mob"
-                    width={48}
-                    height={48}
-                    unoptimized
-                    loader={customLoader}
-                  />
-                ) : (
-                  <FileInputButton
-                    onFileSelected={(list) => handleNewImage(rowIndex, list)}
-                    rightIcon={<ArrowUpTrayIcon height={16} width={16} />}
-                  />
-                )}
-              </td>
-              {row.drops.map((drop, columnIndex) => (
-                <td
-                  key={columnIndex}
-                  className="w-32 text-center align-middle border-2 border-gray-200"
-                  onClick={() => onCellClick(rowIndex, columnIndex)}
-                >
-                  {drop && (
-                    <DropItem
-                      dropType={drop.dropType}
-                      item={drop.item}
-                      selected={false}
-                      onClick={() => {}}
-                    />
-                  )}
+          {[...Array(35)].map((_, rowIndex) => {
+            return (
+              <tr key={rowIndex}>
+                <td className="w-32 text-center align-middle border-2 border-gray-200">
+                  #{rowIndex + 1}
                 </td>
-              ))}
-            </tr>
-          ))}
+                {rows.map((row, colIndex) => (
+                  <td
+                    key={colIndex}
+                    className="w-32 text-center align-middle border-2 border-gray-200"
+                    onClick={() => onCellClick(rowIndex, colIndex)}
+                  >
+                    {row.drops[rowIndex] && (
+                      <DropItem
+                        dropType={row.drops[rowIndex]!.dropType}
+                        item={row.drops[rowIndex]!.item}
+                        selected={false}
+                        onClick={() => {}}
+                      />
+                    )}
+                  </td>
+                ))}
+              </tr>
+            );
+          })}
         </tbody>
       </table>
       <IconButton icon={PlusIcon} onClick={onNewRow} />
@@ -264,6 +268,7 @@ const DropTableMaker: NextPage = () => {
     ALL_ITEMS.filter((item) => item.group === ROSE_ITEM_GROUPS[0].id)
   );
   const [selectedTool, setSelectedTool] = useState<ToolType>("add");
+  const [tableType, setTableType] = useState<"text" | "icon">("icon");
 
   const addToolClasses = clsx({
     "shadow-[inset_0_-2px_4px_rgba(0,0,0,0.6)]": selectedTool === "add",
