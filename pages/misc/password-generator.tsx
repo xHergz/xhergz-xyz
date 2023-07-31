@@ -10,6 +10,7 @@ const PasswordGenerator: NextPage = () => {
   const [service, setService] = useState<string>("");
   const [generated, setGenerated] = useState<string>();
   const [copied, setCopied] = useState<boolean>(false);
+  const [legacy, setLegacy] = useState<boolean>(true);
 
   const generatePassword = async (): Promise<void> => {
     const hash = await sha256(`${password}+${service.toLowerCase()}`);
