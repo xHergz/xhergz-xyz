@@ -1,3 +1,7 @@
+/**
+ * @jest-environment node
+ */
+
 type SymbolData = {
   index: number;
   symbol: string;

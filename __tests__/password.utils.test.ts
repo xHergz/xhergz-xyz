@@ -58,7 +58,32 @@ describe("[FUNC] generateV1Password", () => {
 
   it("should always return a string with a symbol", async () => {
     const data = await generateV1Password("some_password", "Some Service");
-    const regex = "";
-    //expect(data.includes()).toBe(16);
+    const regex = new RegExp(/[!@#$%^&*()]/);
+    expect(regex.test(data)).toBe(true);
+  });
+
+  it("should always return a string with a number as the 11th character", async () => {
+    const data = await generateV1Password(
+      "another_password",
+      "Another Service"
+    );
+    const regex = new RegExp(/[0-9]/);
+    expect(regex.test(data[10])).toBe(true);
+  });
+
+  it("should always return a string with a uppercase letter as the 12th and 16th characters", async () => {
+    const data = await generateV1Password(
+      "one_more_password",
+      "One More Service"
+    );
+    const regex = new RegExp(/[A-Z]/);
+    expect(regex.test(data[11])).toBe(true);
+    expect(regex.test(data[15])).toBe(true);
+  });
+
+  it("should always return a string with a lowercase letter as the 14th character", async () => {
+    const data = await generateV1Password("final_password", "Final Service");
+    const regex = new RegExp(/[a-z]/);
+    expect(regex.test(data[13])).toBe(true);
   });
 });

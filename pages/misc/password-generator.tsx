@@ -3,7 +3,8 @@ import { NextPage } from "next";
 
 import PageWrapper from "../../src/components/PageWrapper/PageWrapper";
 import { isEmpty, isNil } from "lodash";
-import { sha256 } from "../../src/utils/password.utils";
+import { generateV1Password, sha256 } from "../../src/utils/password.utils";
+import Checkbox from "../../src/components/Checkbox/Checkbox";
 
 const PasswordGenerator: NextPage = () => {
   const [password, setPassword] = useState<string>("");
@@ -13,8 +14,13 @@ const PasswordGenerator: NextPage = () => {
   const [legacy, setLegacy] = useState<boolean>(true);
 
   const generatePassword = async (): Promise<void> => {
-    const hash = await sha256(`${password}+${service.toLowerCase()}`);
-    setGenerated(hash.slice(0, 16));
+    if (legacy) {
+      const hash = await sha256(`${password}+${service.toLowerCase()}`);
+      setGenerated(hash.slice(0, 16));
+    } else {
+      const hash = await generateV1Password(password, service);
+      setGenerated(hash);
+    }
   };
 
   const copyPassword = (): void => {
@@ -38,7 +44,10 @@ const PasswordGenerator: NextPage = () => {
           value={service}
           onChange={(event) => setService(event.currentTarget.value)}
         />
-
+        <div className="flex space-x-4">
+          <label>Legacy</label>
+          <Checkbox checked={legacy} onChange={setLegacy} />
+        </div>
         <button
           color="blue"
           onClick={generatePassword}
