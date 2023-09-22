@@ -3,6 +3,7 @@ import React from "react";
 import { isNil } from "lodash";
 
 import { BaseProps } from "../../utils/componentUtils";
+import clsx from "clsx";
 
 export type SegmentedControlOption<T> = {
   label: string;
@@ -20,16 +21,16 @@ type SegmentedControlButtonProps<T> = {
 function SegmentedControlButton<T>(
   props: SegmentedControlButtonProps<T>
 ): JSX.Element {
+  const classes = clsx({
+    segmentedControlButton: true,
+    "bg-blue-500": props.disabled,
+  });
   const clicked = (): void => {
     props.onClick(props.option.value);
   };
 
   return (
-    <button
-      className="segmentedControlButton"
-      onClick={clicked}
-      disabled={props.disabled}
-    >
+    <button className={classes} onClick={clicked} disabled={props.disabled}>
       {props.option.label}
     </button>
   );

@@ -11,6 +11,7 @@ const ROSE_PATHS = {
   MONSTER_COLOUR: "/rose/monster-colour",
   PARTY_EXP: "/rose/party-exp",
   REFINE_DATA: "/rose/refine-data",
+  STAT_CALC: "/rose/stat-calc",
 };
 
 const ROSE_SECTIONS = [
@@ -37,6 +38,10 @@ const ROSE_SECTIONS = [
       {
         title: "Monster Colour Calculator",
         href: ROSE_PATHS.MONSTER_COLOUR,
+      },
+      {
+        title: "Stat Calculator",
+        href: ROSE_PATHS.STAT_CALC,
       },
     ],
   },
