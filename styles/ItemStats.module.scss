@@ -1,0 +1,18 @@
+.itemStatsDisplay {
+    display: flex;
+}
+
+.divider {
+    margin: 8px 0;
+}
+
+.filterFields {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 8px 0;
+}
+
+.filterOption {
+    padding: 0 8px;
+}
