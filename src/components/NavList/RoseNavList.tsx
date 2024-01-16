@@ -10,6 +10,7 @@ const ROSE_PATHS = {
   ITEM_STATS: "/rose/item-stats",
   MONSTER_COLOUR: "/rose/monster-colour",
   PARTY_EXP: "/rose/party-exp",
+  QUEST_REWARDS: "/rose/quest-rewards",
   REFINE_DATA: "/rose/refine-data",
 };
 
@@ -37,6 +38,10 @@ const ROSE_SECTIONS = [
       {
         title: "Monster Colour Calculator",
         href: ROSE_PATHS.MONSTER_COLOUR,
+      },
+      {
+        title: "Quest Rewards Calculator",
+        href: ROSE_PATHS.QUEST_REWARDS,
       },
     ],
   },
