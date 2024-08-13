@@ -9,16 +9,17 @@ import Checkbox from "../../src/components/Checkbox/Checkbox";
 const PasswordGenerator: NextPage = () => {
   const [password, setPassword] = useState<string>("");
   const [service, setService] = useState<string>("");
+  const [salt, setSalt] = useState<string>("");
   const [generated, setGenerated] = useState<string>();
   const [copied, setCopied] = useState<boolean>(false);
-  const [legacy, setLegacy] = useState<boolean>(true);
+  const [legacy, setLegacy] = useState<boolean>(false);
 
   const generatePassword = async (): Promise<void> => {
     if (legacy) {
       const hash = await sha256(`${password}+${service.toLowerCase()}`);
       setGenerated(hash.slice(0, 16));
     } else {
-      const hash = await generateV1Password(password, service);
+      const hash = await generateV1Password(password, service, salt);
       setGenerated(hash);
     }
   };
@@ -43,6 +44,11 @@ const PasswordGenerator: NextPage = () => {
         <input
           value={service}
           onChange={(event) => setService(event.currentTarget.value)}
+        />
+        <label>Salt (optional)</label>
+        <input
+          value={salt}
+          onChange={(event) => setSalt(event.currentTarget.value)}
         />
         <div className="flex space-x-4">
           <label>Legacy</label>

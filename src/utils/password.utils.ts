@@ -99,13 +99,14 @@ export const generateLegacyPassword = async (
 
 export const generateV1Password = async (
   password: string,
-  service: string
+  service: string,
+  salt: string = ""
 ): Promise<string> => {
   // Normalize service name
   const serviceData = service.toLowerCase();
 
   // Get Legacy password
-  const hash = await generateLegacyPassword(password, service);
+  const hash = await generateLegacyPassword(password + salt, service);
 
   // Add symbol to string
   const symbolData = stringToSymbol(serviceData);
